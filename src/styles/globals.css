@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+main{
+    background-image: url('./../assets/pexels-cottonbro-studio-7583382\ \(1\).jpg');
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
