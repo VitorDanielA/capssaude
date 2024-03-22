@@ -11,25 +11,26 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { id: 1, text: 'Home' },
-    { id: 2, text: 'Company' },
-    { id: 3, text: 'Resources' },
-    { id: 4, text: 'About' },
-    { id: 5, text: 'Contact' },
+    { id: 1, text: 'Home', anchor: '#home' },
+    { id: 2, text: 'Logar', anchor: '#logar' },
+    { id: 3, text: 'Serviços', anchor: '#service' },
+    { id: 4, text: 'Sobre', anchor: '#about' },
+    { id: 5, text: 'Contato', anchor: '#contact' },
   ];
 
   return (
-    <div className='bg-white font-medium flex justify-between items-center h-24 max-w-[100%] mx-auto px-4'>
+    <div className='bg-white font-medium flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 fixed w-full'>
       <Image src="https://flowbite.com/docs/images/logo.svg" className="me-2" alt="Flowbite Logo" width={50} height={50}></Image>
       <h1 className='w-full text-3xl '>CAPS Saúde</h1>
       <ul className='hidden md:flex'>
         {navItems.map(item => (
-          <li
+          <a
             key={item.id}
             className='p-4 hover:bg-blue-500 hover:text-white rounded-xl m-2 cursor-pointer duration-300'
+            href={item.anchor}
           >
             {item.text}
-          </li>
+          </a>
         ))}
       </ul>
 
@@ -48,12 +49,13 @@ const Navbar = () => {
         <h1 className='w-full text-3xl font-bold text-white m-4'>CAPS Saúde</h1>
 
         {navItems.map(item => (
-          <li
+          <a
             key={item.id}
-            className=' p-4 text-white hover:bg-white duration-300 cursor-pointer border-gray-600 hover:text-blue-500'
+            className=' p-4 text-white hover:bg-white duration-300 cursor-pointer border-gray-600 hover:text-blue-500 flex flex-col'
+            href={item.anchor}
           >
             {item.text}
-          </li>
+          </a>
         ))}
       </ul>
     </div>
