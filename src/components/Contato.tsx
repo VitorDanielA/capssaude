@@ -12,12 +12,12 @@ export default function Contato(){
             <div className="flex flex-wrap items-center w-full justify-around mt-28">
                 <div className='w-[450px] flex flex-col'>
                     <h2 className='text-2xl font-medium'>Consiga Informações e Conselhos <br />Com Profissionais</h2>
-                    <div className='flex flex-wrap justify-between'>
+                    <div className='flex flex-wrap justify-center'>
                         <MiniCard img={Celular} titulo='Telefone' descricao='00 12345-6789'/>
                         <MiniCard img={Email} titulo='Email' descricao='capssaude@gmail.com'/>
-                        <div className="flex w-full items-center justify-center">
+                       
                         <MiniCard img={Maps} titulo='Localização' descricao='Irecê BA'/>
-                        </div>
+                        
                     </div>
                 </div>
                 <div className='mt-10 p-3.5'>
