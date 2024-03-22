@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .home{
-    background-image: url('./../assets/pexels-cottonbro-studio-7583382\ \(1\).jpg');
-    background-position: top;
+    background-image: url('./../assets/pexels-jonathan-borba-3259624.jpg');
+    background-position: middle;
     background-size: cover;
     background-repeat: no-repeat;
 }

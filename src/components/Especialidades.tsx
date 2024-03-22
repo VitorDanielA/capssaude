@@ -7,7 +7,7 @@ import Examinando from './../assets/examinador-medico.png';
 
 export default function Especialidades(){
     return(
-        <div className="min-h-[100vh]">
+        <div className="min-h-[100vh]" id="about">
             <h1 className="text-5xl text-center mb-10 font-semibold">Nossas Especialidades</h1>
             <div className=" flex items-center justify-center flex-wrap">
                 <Card imagem={Cerebro} descricao="O Departamento de Psiquiatria é dedicado ao estudo, diagnóstico e tratamento de distúrbios mentais, emocionais e comportamentais." titulo="Psiquiatra"/>
