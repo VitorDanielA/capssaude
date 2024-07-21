@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import ImgSaude from './../assets/undraw_medicine_b-1-ol.svg';
+import Link from "next/link";
 
 export default function Login(){
     return(
@@ -24,7 +25,7 @@ export default function Login(){
                     <button className='bg-blue-500 p-2.5 mt-2 rounded-lg text-white hover:bg-blue-400'>Entrar</button>
                 </div>
                 <p className='mt-3 text-center'>
-                    Ainda não tem uma conta? <span className='text-blue-700 border-b border-blue-700 cursor-pointer hover:text-blue-500'>Crie aqui</span>
+                    Ainda não tem uma conta? <span className='text-blue-700 border-b border-blue-700 cursor-pointer hover:text-blue-500'><Link href={"/formCadastrar/FormCadastrar"}>Crie aqui</Link> </span>
                 </p>
             </div>
         </div>
