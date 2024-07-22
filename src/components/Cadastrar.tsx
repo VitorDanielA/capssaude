@@ -9,7 +9,6 @@ export default function Cadastrar() {
         nome: '',
         email: '',
         senha: '',
-        codigo: '',
         nivelAcesso: 1,
     });
 
@@ -29,7 +28,7 @@ export default function Cadastrar() {
         console.log(form)
 
         try {
-            const response = await fetch('http://localhost:8080/usuario', {
+            const response = await fetch('http://localhost:8080/caps/usuario', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,13 +75,6 @@ export default function Cadastrar() {
           name: 'senha',
           className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
           placeholder: 'Senha',
-          required: true,
-        },
-        {
-          type: 'text',
-          name: 'codigo',
-          className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
-          placeholder: 'Codigo',
           required: true,
         },
       ];
