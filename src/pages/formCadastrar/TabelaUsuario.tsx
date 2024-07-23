@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { Inter } from 'next/font/google';
 import Editar from '@/components/Editar';
+import InputFieldProps from '@/components/InputFieldProps';
+import lupa from '@/assets/lupa.png';
+import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -9,6 +12,7 @@ export default function TabelaUsuario() {
     const [usuarios, setUsuarios] = useState([]);
     const [selectedUser, setSelectedUser] = useState([]);
     const [editUser, setEditUser] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,6 +52,19 @@ export default function TabelaUsuario() {
         }
     };
 
+    const handleChangeForm = (event) => {
+      const { name, value } = event.target;
+  
+      if (name === 'searchQuery') {
+        setSearchQuery(value);
+        return;
+      }
+    };
+
+    const filteredUsers = usuarios.filter((usuario) =>
+      usuario.nome.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <main className="flex flex-col min-h-screen">
             <Navbar />
@@ -56,6 +73,7 @@ export default function TabelaUsuario() {
                 <h1 className="text-3xl font-bold text-center mb-8">
                     Lista de Usuários
                 </h1>
+
 
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
@@ -75,7 +93,7 @@ export default function TabelaUsuario() {
                         </tr>
                     </thead>
                     <tbody>
-                        {usuarios.map((usuario) => (
+                        {filteredUsers.map((usuario) => (
                             <tr key={usuario.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900">
                                 <td className="px-4 py-4 sm:px-6">{usuario.nome}</td>
                                 <td className="px-4 py-4 sm:px-6">{usuario.email}</td>
@@ -92,6 +110,20 @@ export default function TabelaUsuario() {
                         ))}
                     </tbody>
                 </table>
+          <div className="mb-4 relative flex items-center">
+            <div className='absolute inset-y-0 left-3 flex items-center pointer-events-none z-0'>
+
+          <Image src={lupa} alt="Ícone de Lupa" className="h-5 w-5 text-gray-400" />
+            </div>
+          <InputFieldProps
+            type="text"
+            name="searchQuery"
+                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-60 p-2.5 focus: outline-none my-5 pl-9"
+            placeholder="Pesquisar por nome"
+            value={searchQuery}
+            onChange={handleChangeForm}
+          />
+        </div>
             </div>
 
             {editUser && (
