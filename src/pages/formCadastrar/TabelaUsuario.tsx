@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { Inter } from 'next/font/google';
+import Editar from '@/components/Editar';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function TabelaUsuario() {
     const [usuarios, setUsuarios] = useState([]);
+    const [selectedUser, setSelectedUser] = useState([]);
+    const [editUser, setEditUser] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,6 +27,26 @@ export default function TabelaUsuario() {
 
         fetchData();
     }, []);
+
+    const handleEdit = (usuario) => {
+        setSelectedUser(usuario);
+        setEditUser(true);
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8080/caps/usuario/${id}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                setUsuarios(usuarios.filter(usuario => usuario.id !== id));
+            } else {
+                console.error('Erro ao excluir usuário');
+            }
+        } catch (error) {
+            console.error('Erro ao excluir usuário:', error);
+        }
+    };
 
     return (
         <main className="flex flex-col min-h-screen">
@@ -46,6 +69,9 @@ export default function TabelaUsuario() {
                             <th scope="col" className="px-4 py-3 sm:px-6">
                                 Nível de Acesso
                             </th>
+                            <th scope="col" className="px-4 py-3 sm:px-6" align='left'>
+                                #
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,11 +80,30 @@ export default function TabelaUsuario() {
                                 <td className="px-4 py-4 sm:px-6">{usuario.nome}</td>
                                 <td className="px-4 py-4 sm:px-6">{usuario.email}</td>
                                 <td className="px-4 py-4 sm:px-6">{usuario.nivelAcesso}</td>
+                                <td className="px-4 py-4 sm:px-6">
+                                    <button onClick={() => handleEdit(usuario)} className="text-blue-600 hover:text-blue-900">
+                                        Editar
+                                    </button>
+                                    <button onClick={() => handleDelete(usuario.id)} className="text-red-600 hover:text-red-900 ml-4">
+                                        Excluir
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
+
+            {editUser && (
+                <Editar
+                    usuario={selectedUser}
+                    onClose={() => setEditUser(false)}
+                    onSave={(updatedUser) => {
+                        setUsuarios(usuarios.map(usuario => (usuario.id === updatedUser.id ? updatedUser : usuario)));
+                        setEditUser(false);
+                    }}
+                />
+            )}
 
         </main>
     );
