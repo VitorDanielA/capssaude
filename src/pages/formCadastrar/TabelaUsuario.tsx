@@ -4,14 +4,16 @@ import { Inter } from 'next/font/google';
 import Editar from '@/components/Editar';
 import InputFieldProps from '@/components/InputFieldProps';
 import lupa from '@/assets/lupa.png';
+import editar from '@/assets/editar.png';
+import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function TabelaUsuario() {
     const [usuarios, setUsuarios] = useState([]);
-    const [selectedUser, setSelectedUser] = useState([]);
-    const [editUser, setEditUser] = useState([]);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [editUser, setEditUser] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
@@ -87,8 +89,11 @@ export default function TabelaUsuario() {
                             <th scope="col" className="px-4 py-3 sm:px-6">
                                 Nível de Acesso
                             </th>
-                            <th scope="col" className="px-4 py-3 sm:px-6" align='left'>
-                                #
+                            <th scope="col" className="px-4 py-3 sm:px-6">
+                                Editar
+                            </th>
+                            <th scope="col" className="px-4 py-3 sm:px-6">
+                                Excluir
                             </th>
                         </tr>
                     </thead>
@@ -99,11 +104,13 @@ export default function TabelaUsuario() {
                                 <td className="px-4 py-4 sm:px-6">{usuario.email}</td>
                                 <td className="px-4 py-4 sm:px-6">{usuario.nivelAcesso}</td>
                                 <td className="px-4 py-4 sm:px-6">
-                                    <button onClick={() => handleEdit(usuario)} className="text-blue-600 hover:text-blue-900">
-                                        Editar
-                                    </button>
-                                    <button onClick={() => handleDelete(usuario.id)} className="text-red-600 hover:text-red-900 ml-4">
-                                        Excluir
+                                <button onClick={() => handleEdit(usuario)} className="text-blue-600 hover:text-blue-900 ml-3 flex items-center">
+                                    <Image src={editar} alt="Editar" width={20} height={20} className="mr-2" />               
+                                </button>
+                                </td>
+                                <td className="px-4 py-4 sm:px-6">
+                                    <button onClick={() => handleDelete(usuario.id)} className="text-red-600 hover:text-red-900 ml-4 flex items-center">
+                                        <Image src={deletar} alt="Deletar usuário" width={20} height={20} className="mr-2" />
                                     </button>
                                 </td>
                             </tr>
