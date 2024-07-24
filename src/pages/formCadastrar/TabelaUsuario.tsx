@@ -7,6 +7,7 @@ import lupa from '@/assets/lupa.png';
 import editar from '@/assets/editar.png';
 import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -55,26 +56,61 @@ export default function TabelaUsuario() {
     };
 
     const handleChangeForm = (event) => {
-      const { name, value } = event.target;
-  
-      if (name === 'searchQuery') {
-        setSearchQuery(value);
-        return;
-      }
+        const { name, value } = event.target;
+
+        if (name === 'searchQuery') {
+            setSearchQuery(value);
+            return;
+        }
     };
 
     const filteredUsers = usuarios.filter((usuario) =>
-      usuario.nome.toLowerCase().includes(searchQuery.toLowerCase())
+        usuario.nome.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    const getNivelAcessoLabel = (nivelAcesso) => {
+        switch (nivelAcesso) {
+            case 1:
+                return 'Usuário Padrão';
+            case 2:
+                return 'Médico';
+            case 3:
+                return 'Gestor';
+            default:
+                return 'Nível Inválido';
+        }
+    };
 
     return (
         <main className="flex flex-col min-h-screen">
             <Navbar />
 
-            <div className="container mx-auto p-4 mt-10">
-                <h1 className="text-3xl font-bold text-center mb-8">
-                    Lista de Usuários
+            <div className="container mx-auto p-4 mt-10 ">
+                <h1 className="text-3xl font-bold text-center mb-8 mt-8">
+                    TABELA DE USUÁRIOS
                 </h1>
+
+                <div className='flex items-center justify-between mb-4'>
+
+                    <div className="relative flex items-center">
+                        <div className='absolute inset-y-0 left-3 flex items-center pointer-events-none z-0'>
+
+                            <Image src={lupa} alt="Ícone de Lupa" className="h-5 w-5 text-gray-400" />
+                        </div>
+                        <InputFieldProps
+                            type="text"
+                            name="searchQuery"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-60 p-2.5 focus: outline-none my-5 pl-14"
+                            placeholder="Pesquisar por nome"
+                            value={searchQuery}
+                            onChange={handleChangeForm}
+                        />
+                    </div>
+                        <Link href="/formCadastrar/FormCadastrar" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Adicionar Usuário
+                        </Link>
+
+                </div>
 
 
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -102,11 +138,11 @@ export default function TabelaUsuario() {
                             <tr key={usuario.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900">
                                 <td className="px-4 py-4 sm:px-6">{usuario.nome}</td>
                                 <td className="px-4 py-4 sm:px-6">{usuario.email}</td>
-                                <td className="px-4 py-4 sm:px-6">{usuario.nivelAcesso}</td>
+                                <td className="px-4 py-4 sm:px-6">{getNivelAcessoLabel(usuario.nivelAcesso)}</td>
                                 <td className="px-4 py-4 sm:px-6">
-                                <button onClick={() => handleEdit(usuario)} className="text-blue-600 hover:text-blue-900 ml-3 flex items-center">
-                                    <Image src={editar} alt="Editar" width={20} height={20} className="mr-2" />               
-                                </button>
+                                    <button onClick={() => handleEdit(usuario)} className="text-blue-600 hover:text-blue-900 ml-3 flex items-center">
+                                        <Image src={editar} alt="Editar" width={20} height={20} className="mr-2" />
+                                    </button>
                                 </td>
                                 <td className="px-4 py-4 sm:px-6">
                                     <button onClick={() => handleDelete(usuario.id)} className="text-red-600 hover:text-red-900 ml-4 flex items-center">
@@ -117,20 +153,6 @@ export default function TabelaUsuario() {
                         ))}
                     </tbody>
                 </table>
-          <div className="mb-4 relative flex items-center">
-            <div className='absolute inset-y-0 left-3 flex items-center pointer-events-none z-0'>
-
-          <Image src={lupa} alt="Ícone de Lupa" className="h-5 w-5 text-gray-400" />
-            </div>
-          <InputFieldProps
-            type="text"
-            name="searchQuery"
-                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-60 p-2.5 focus: outline-none my-5 pl-9"
-            placeholder="Pesquisar por nome"
-            value={searchQuery}
-            onChange={handleChangeForm}
-          />
-        </div>
             </div>
 
             {editUser && (

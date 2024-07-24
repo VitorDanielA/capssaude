@@ -43,7 +43,7 @@ export default function Cadastrar() {
             // Verifique se a resposta do servidor foi bem-sucedida
             if (response.ok) {
                 // Redirecione para a página desejada após o cadastro
-                router.push('/');
+                router.push('TabelaUsuario');
                 alert(json.message || 'Usuário criado com sucesso!');
             } else {
                 // Exiba um erro caso a resposta do servidor não seja 200
