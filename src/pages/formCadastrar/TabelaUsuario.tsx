@@ -100,15 +100,17 @@ export default function TabelaUsuario() {
                         <InputFieldProps
                             type="text"
                             name="searchQuery"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-60 p-2.5 focus: outline-none my-5 pl-14"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none my-5 pl-12 pb-3"
                             placeholder="Pesquisar por nome"
                             value={searchQuery}
                             onChange={handleChangeForm}
                         />
                     </div>
-                        <Link href="/formCadastrar/FormCadastrar" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button className="bg-blue-500 p-2.5 mt-2 rounded-lg text-white hover:bg-blue-400 px-10">
+                        <Link href="/formCadastrar/FormCadastrar">
                             Adicionar Usuário
                         </Link>
+                    </button>
 
                 </div>
 

@@ -13,6 +13,7 @@ export default function Cadastrar() {
     });
 
     const router = useRouter();
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
     const handleChangeForm = (event) => {
         const { name, value } = event.target;
@@ -42,9 +43,12 @@ export default function Cadastrar() {
 
             // Verifique se a resposta do servidor foi bem-sucedida
             if (response.ok) {
-                // Redirecione para a página desejada após o cadastro
-                router.push('TabelaUsuario');
-                alert(json.message || 'Usuário criado com sucesso!');
+                setShowSuccessPopup(true);
+
+                // Aguarda 2 segundos e redireciona
+                setTimeout(() => {
+                  router.push('TabelaUsuario');
+                }, 2000);
             } else {
                 // Exiba um erro caso a resposta do servidor não seja 200
                 alert(json.message || 'Erro ao criar usuário');
@@ -124,6 +128,13 @@ export default function Cadastrar() {
                         </span>
                     </p>
                 </form>
+                {showSuccessPopup && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded shadow-md">
+              <p>Cadastro realizado com sucesso!</p>
+            </div>
+          </div>
+        )}
             </div>
         </div>
     );
