@@ -82,31 +82,26 @@ export default function TabelaUsuario() {
     };
 
     return (
-        <main className="flex flex-col min-h-screen">
+        <main className="flex flex-col">
             <Navbar />
 
-            <div className="container mx-auto p-4 mt-10 ">
+            <div className="">
                 <h1 className="text-3xl font-bold text-center mb-8 mt-8">
                     TABELA DE USUÁRIOS
                 </h1>
 
-                <div className='flex items-center justify-between mb-4'>
-
+                <div className='flex justify-between gap-5 my-5'>
                     <div className="relative flex items-center">
-                        <div className='absolute inset-y-0 left-3 flex items-center pointer-events-none z-0'>
-
-                            <Image src={lupa} alt="Ícone de Lupa" className="h-5 w-5 text-gray-400" />
-                        </div>
                         <InputFieldProps
                             type="text"
                             name="searchQuery"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none my-5 pl-12 pb-3"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 focus: outline-none pb-3 fix-button"
                             placeholder="Pesquisar por nome"
                             value={searchQuery}
                             onChange={handleChangeForm}
                         />
                     </div>
-                    <button className="bg-blue-500 p-2.5 mt-2 rounded-lg text-white hover:bg-blue-400 px-10">
+                    <button className="bg-blue-500 rounded-lg text-white h-12 text-sm hover:bg-blue-400 px-5">
                         <Link href="/formCadastrar/FormCadastrar">
                             Adicionar Usuário
                         </Link>
@@ -115,7 +110,7 @@ export default function TabelaUsuario() {
                 </div>
 
 
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                {/* <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-4 py-3 sm:px-6">
@@ -154,7 +149,121 @@ export default function TabelaUsuario() {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </table> */}
+
+                
+
+<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" className="px-6 py-3">
+                    Product name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Color
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Category
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Apple MacBook Pro 17"
+                </th>
+                <td className="px-6 py-4">
+                    Silver
+                </td>
+                <td className="px-6 py-4">
+                    Laptop
+                </td>
+                <td className="px-6 py-4">
+                    $2999
+                </td>
+                <td className="px-6 py-4">
+                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Microsoft Surface Pro
+                </th>
+                <td className="px-6 py-4">
+                    White
+                </td>
+                <td className="px-6 py-4">
+                    Laptop PC
+                </td>
+                <td className="px-6 py-4">
+                    $1999
+                </td>
+                <td className="px-6 py-4">
+                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Magic Mouse 2
+                </th>
+                <td className="px-6 py-4">
+                    Black
+                </td>
+                <td className="px-6 py-4">
+                    Accessories
+                </td>
+                <td className="px-6 py-4">
+                    $99
+                </td>
+                <td className="px-6 py-4">
+                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Google Pixel Phone
+                </th>
+                <td className="px-6 py-4">
+                    Gray
+                </td>
+                <td className="px-6 py-4">
+                    Phone
+                </td>
+                <td className="px-6 py-4">
+                    $799
+                </td>
+                <td className="px-6 py-4">
+                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Apple Watch 5
+                </th>
+                <td className="px-6 py-4">
+                    Red
+                </td>
+                <td className="px-6 py-4">
+                    Wearables
+                </td>
+                <td className="px-6 py-4">
+                    $999
+                </td>
+                <td className="px-6 py-4">
+                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
             </div>
 
             {editUser && (

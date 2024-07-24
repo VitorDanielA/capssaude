@@ -8,3 +8,7 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.adjust-index{
+    z-index: 1 !important;
+}
