@@ -1,6 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-};
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
-export default nextConfig;
+export async function rewrites() {
+  return [
+    {
+      source: '/api/:path*',
+      destination: 'http://localhost:8080/:path*',
+    },
+  ];
+}
