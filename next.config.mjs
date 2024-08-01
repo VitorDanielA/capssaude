@@ -1,4 +1,4 @@
-import { createProxyMiddleware } from 'http-proxy-middleware';
+//import { createProxyMiddleware } from 'http-proxy-middleware';
 
 export async function rewrites() {
   return [
