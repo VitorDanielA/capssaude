@@ -1,12 +1,13 @@
 import Image from 'next/image';
+import Saude from './../assets/saude.png';
 
 export default function Footer(){
     return(
-        <footer className="bg-blue-500 text-white">
+        <footer className="bg-[#005562] text-white">
             <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <a href="https://flowbite.com/" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                    <Image src="https://flowbite.com/docs/images/logo.svg" className="me-2" alt="Flowbite Logo" width={50} height={50}></Image>
+                    <Image src={Saude} className="me-2" alt="Flowbite Logo" width={50} height={50}></Image>
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CAPS Saúde</span>
                     </a>
                     <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0 dark:text-gray-400">

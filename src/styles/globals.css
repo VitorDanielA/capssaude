@@ -12,3 +12,13 @@
 .adjust-index{
     z-index: 1 !important;
 }
+
+.adjust-buttons{
+
+}
+
+@media screen and (max-width: 460px){
+    .adjust-buttons{
+        width: 100%;
+    }
+}

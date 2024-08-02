@@ -1,38 +1,36 @@
 import { useState, useEffect, SetStateAction } from 'react';
-import Navbar from '@/components/Navbar';
-import { Inter } from 'next/font/google';
 import Editar from '@/components/Editar';
 import InputFieldProps from '@/components/InputFieldProps';
-import lupa from '@/assets/lupa.png';
 import editar from '@/assets/editar.png';
 import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import { deleteUser, fetchUsers } from '@/helpers/usuario';
 
-const inter = Inter({ subsets: ['latin'] });
+interface usuariosProps{
+    id: number,
+    nome: string,
+    email: string,
+    nivelAcesso: number,
+}
 
 export default function TabelaUsuario() {
-    const [usuarios, setUsuarios] = useState([]);
+    const [usuarios, setUsuarios] = useState<usuariosProps[]>([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [editUser, setEditUser] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        const fetchData = async () => {
+        const loadUsers = async () => {
             try {
-                const response = await fetch('http://localhost:8080/caps/usuario', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const data: { nome: string; email: string; nivelAcesso: number }[] = await response.json();
+                const data = await fetchUsers();
                 setUsuarios(data);
             } catch (error) {
                 console.error('Erro ao buscar usuários:', error);
             }
         };
 
-        fetchData();
+        loadUsers();
     }, []);
 
     const handleEdit = (usuario: SetStateAction<null>) => {
@@ -40,22 +38,16 @@ export default function TabelaUsuario() {
         setEditUser(true);
     };
 
-    const handleDelete = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/caps/usuario/${id}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
-                setUsuarios(usuarios.filter(usuario => usuario.id !== id));
-            } else {
-                console.error('Erro ao excluir usuário');
-            }
-        } catch (error) {
-            console.error('Erro ao excluir usuário:', error);
+    const handleDelete = async (id: number) => {
+        const success = await deleteUser(id);
+        if (success) {
+            setUsuarios(usuarios.filter(usuario => usuario.id !== id));
+        } else {
+            console.error('Erro ao excluir usuário');
         }
-    };
+    };    
 
-    const handleChangeForm = (event) => {
+    const handleChangeForm = (event: { target: { name: any; value: any; }; }) => {
         const { name, value } = event.target;
 
         if (name === 'searchQuery') {
@@ -68,7 +60,7 @@ export default function TabelaUsuario() {
         usuario.nome.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const getNivelAcessoLabel = (nivelAcesso) => {
+    const getNivelAcessoLabel = (nivelAcesso: number) => {
         switch (nivelAcesso) {
             case 1:
                 return 'Usuário Padrão';
@@ -85,63 +77,67 @@ export default function TabelaUsuario() {
 
     return (
         <main className="flex flex-col">
-            <Navbar />
-
-            <div className="">
-                <h1 className="text-3xl font-bold text-center mb-8 mt-8">
+            <div className="mt-24">
+                <h1 className="sm:text-5xl text-3xl text-[#005562] font-bold text-center mb-8 mt-8">
                     TABELA DE USUÁRIOS
                 </h1>
 
-                <div className='flex justify-between gap-5 my-5 mx-5'>
-                    <div className="relative flex items-center">
+                <div className='flex justify-start flex-wrap gap-5 my-5 mx-10'>
+                    <div className="flex items-center adjust-buttons">
                         <InputFieldProps
                             type="text"
                             name="searchQuery"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 focus: outline-none pb-3 fix-button"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 focus: outline-none pb-3 fix-button adjust-buttons focus:border-[#1f616b]"
                             placeholder="Pesquisar por nome"
                             value={searchQuery}
                             onChange={handleChangeForm}
                         />
                     </div>
-                    <button className="bg-blue-500 rounded-lg text-white h-12 text-sm hover:bg-blue-400 px-5">
+                    <button className="bg-[#005562] rounded-lg text-white h-12 text-sm transition-all hover:bg-[#1f616b] px-5 adjust-buttons ">
                         <Link href="/formCadastrar/FormCadastrar">
                             Adicionar Usuário
                         </Link>
                     </button>
-
                 </div>
 
-
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-100">
-                        <tr>
-                            {trs.map((tr, index) => (
-                                <th scope="col" className="px-4 py-3 sm:px-6" key={index}>
-                                    {tr}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredUsers.map((usuario, index) => (
-                            <tr key={index} className="bg-white border-b">
-                                <td className="px-4 py-4 sm:px-6">{usuario.nome}</td>
-                                <td className="px-4 py-4 sm:px-6">{usuario.email}</td>
-                                <td className="px-4 py-4 sm:px-6">{getNivelAcessoLabel(usuario.nivelAcesso)}</td>
-                                <td className="px-4 py-4 sm:px-6">
-                                    <button onClick={() => handleEdit(usuario)} className="text-blue-600 hover:text-blue-900 ml-3 flex items-center">
-                                        <Image src={editar} alt="Editar" width={20} height={20} className="mr-2" />
-                                    </button>
-                                </td>
-                                <td className="px-4 py-4 sm:px-6">
-                                    <button onClick={() => handleDelete(usuario.id)} className="text-red-600 hover:text-red-900 ml-4 flex items-center">
-                                        <Image src={deletar} alt="Deletar usuário" width={20} height={20} className="mr-2" />
-                                    </button>
-                                </td>
+                <div className="relative overflow-x-auto shadow-md rounded-lg mx-10">
+                    <table className="w-full text-sm text-left rtl:text-right text-white bg-[#144d54] ">
+                        <thead className="text-xs text-white uppercase dark:bg-gray-800 text-center">
+                            <tr>
+                                {trs.map((tr, index) => (
+                                    <th scope="col" className="px-6 py-3" key={index}>
+                                        {tr}
+                                    </th>
+                                ))}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody className='bg-[#e0f9fb]'>
+                            {filteredUsers.map((usuario, index) => (
+                                <tr key={index} className="text-center font-medium text-[#144d54]">
+                                    <th scope="row" className="px-6 py-4 whitespace-nowrap">
+                                        {usuario.nome}
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        {usuario.email}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {getNivelAcessoLabel(usuario.nivelAcesso)}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <button onClick={() => handleEdit(usuario)} className="text-blue-400 hover:text-blue-600">
+                                            <Image src={editar} alt='' width={24} className=''/>
+                                        </button>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <button onClick={() => handleDelete(usuario.id)} className="text-red-400 hover:text-red-600">
+                                            <Image src={deletar} alt='' width={24}/>
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             {editUser && (

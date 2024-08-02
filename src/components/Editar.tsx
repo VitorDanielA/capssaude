@@ -1,26 +1,20 @@
+import { updateUser } from '@/helpers/usuario';
 import { useState } from 'react';
 
 const Editar = ({ usuario, onClose, onSave }) => {
     const [formData, setFormData] = useState({ ...usuario });
 
-    const handleChange = (e) => {
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData((prev: any) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:8080/caps/usuario/${formData.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            if (response.ok) {
-                const updatedUser = await response.json();
-                onSave(updatedUser);
+            const { ok, json } = await updateUser(formData.id, formData);
+            if (ok) {
+                onSave(json);
             } else {
                 console.error('Erro ao atualizar usuário');
             }
@@ -28,6 +22,7 @@ const Editar = ({ usuario, onClose, onSave }) => {
             console.error('Erro ao atualizar usuário:', error);
         }
     };
+    
 
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">

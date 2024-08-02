@@ -9,7 +9,7 @@ export default function Especialidades(){
     return(
         <div className="min-h-[100vh]" id="about">
             <h1 className="text-5xl text-center mb-10 font-semibold">Nossas Especialidades</h1>
-            <div className=" flex items-center justify-center flex-wrap">
+            <div className="flex items-center justify-center flex-wrap">
                 <Card imagem={Cerebro} descricao="O Departamento de Psiquiatria é dedicado ao estudo, diagnóstico e tratamento de distúrbios mentais, emocionais e comportamentais." titulo="Psiquiatra"/>
                 <Card imagem={Conversa} descricao="O Departamento de Psicologia é focado no estudo do comportamento humano e dos processos mentais." titulo="Psicologo"/>
                 <Card imagem={ApertoDeMaos} descricao="O Departamento de Assistência Social concentra-se em fornecer suporte e recursos para indivíduos e comunidades que enfrentam desafios sociais, emocionais e econômicos." titulo="Assistênte Social"/>
