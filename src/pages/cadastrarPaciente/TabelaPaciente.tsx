@@ -77,83 +77,69 @@ export default function TabelaPaciente() {
         paciente.nome.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    const trs = ["Nome", "CPF", "Data de nascimento", "CEP", "Bairro", "Logradouro", "Telefone", "Telefone Responsavel", "Editar", "Excluir"];
+
     return (
         <main className="flex flex-col">
-            <Navbar />
-
-            <div className="">
-                <h1 className="text-3xl font-bold text-center mb-8 mt-8">
+            <div className="mt-24">
+                <h1 className="sm:text-5xl text-3xl text-[#005562] font-bold text-center mb-8 mt-8">
                     TABELA DE PACIENTES
                 </h1>
 
-                <div className='flex justify-between gap-5 my-5'>
-                    <div className="relative flex items-center">
+                <div className='flex justify-start flex-wrap gap-5 my-5 mx-10'>
+                    <div className="flex items-center adjust-buttons">
                         <InputFieldProps
                             type="text"
                             name="searchQuery"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 focus: outline-none pb-3 fix-button"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 focus: outline-none pb-3 fix-button adjust-buttons focus:border-[#1f616b]"
                             placeholder="Pesquisar por nome"
                             value={searchQuery}
                             onChange={handleChangeForm}
                         />
                     </div>
-                    <button className="bg-blue-500 rounded-lg text-white h-12 text-sm hover:bg-blue-400 px-5">
+                    <button className="bg-[#005562] rounded-lg text-white h-12 text-sm transition-all hover:bg-[#1f616b] px-5 adjust-buttons">
                         <Link href="/cadastrarPaciente/FormCadastrarPaciente">
                             Adicionar Paciente
                         </Link>
                     </button>
-
                 </div>
 
 
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <div className="relative overflow-x-auto shadow-md rounded-lg mx-10">
+                    <table className="w-full text-sm text-left rtl:text-right text-white bg-[#144d54]">
+                        <thead className="text-xs text-white uppercase dark:bg-gray-800 text-center">
                             <tr>
-                                <th scope="col" className="px-6 py-3">
-                                    Nome
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    CPF
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Data de nascimento
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    CEP
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Bairro
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Logradouro
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Telefone
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Telefones do Responsavel
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Editar
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Excluir
-                                </th>
+                                {trs.map((tr, index) => (
+                                    <th scope="col" className="px-6 py-3" key={index}>
+                                        {tr}
+                                    </th>
+                                ))}
                             </tr>
                         </thead>
-                        <tbody>
-
-
-                            {filteredUsers.map((paciente) => (
-                                <tr key={paciente.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <td className="px-6 py-4">{paciente.nome}</td>
-                                    <td className="px-6 py-4">{paciente.cpf}</td>
-                                    <td className="px-6 py-4">{paciente.dataDeNascimento.substring(0, 10)}</td>
-                                    <td className="px-6 py-4">{paciente.cep}</td>
-                                    <td className="px-6 py-4">{paciente.bairro}</td>
-                                    <td className="px-6 py-4">{paciente.logradouro}</td>
-                                    <td className="px-6 py-4">{paciente.telefone}</td>
+                        <tbody className='bg-[#e0f9fb]'>
+                            {filteredUsers.map((paciente, index) => (
+                                <tr key={index} className="text-center font-medium text-[#144d54]">
+                                    <th scope="row" className="px-6 py-4 whitespace-nowrap">
+                                        {paciente.nome}
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        {paciente.cpf}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {paciente.dataDeNascimento.substring(0, 10)}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {paciente.cep}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {paciente.bairro}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {paciente.logradouro}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {paciente.telefone}
+                                    </td>
                                     <td className="px-6 py-4">
                                         {paciente.telefonesEmergencia.map((telefone, index) => (
                                             <span key={index}>
@@ -165,13 +151,13 @@ export default function TabelaPaciente() {
                                         ))}
                                     </td>
                                     <td className="px-6 py-4">
-                                        <button onClick={() => handleEdit(paciente)} className="text-blue-600 hover:text-blue-900 ml-3 flex items-center">
+                                        <button onClick={() => handleEdit(paciente)} className="text-blue-400 hover:text-blue-600">
                                             <Image src={editar} alt="Editar" width={20} height={20} className="mr-2" />
                                         </button>
                                     </td>
-                                    <td className="px-4 py-4 sm:px-6">
-                                        <button onClick={() => handleDelete(paciente.id)} className="text-red-600 hover:text-red-900 ml-4 flex items-center">
-                                            <Image src={deletar} alt="Deletar usuário" width={20} height={20} className="mr-2" />
+                                    <td className="px-6 py-4">
+                                        <button onClick={() => handleDelete(paciente.id)} className="text-red-400 hover:text-red-600">
+                                            <Image src={deletar} alt="Deletar usuário" width={24}/>
                                         </button>
                                     </td>
                                 </tr>
