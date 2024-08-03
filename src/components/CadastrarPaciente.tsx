@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputFieldProps from "@/components/InputFieldProps";
 import { useRouter } from 'next/router';
+import Link from "next/link";
 
 export default function CadastrarPaciente() {
   const [form, setForm] = useState({
@@ -14,6 +15,7 @@ export default function CadastrarPaciente() {
     telefone: "",
     telefonesEmergencia: [],
   });
+
 
   const router = useRouter();
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
@@ -53,10 +55,10 @@ export default function CadastrarPaciente() {
 
       if (response.ok) {
         setShowSuccessPopup(true);
-     
-         setTimeout(() => {
-            router.push('TabelaPaciente');
-          }, 2000);
+
+        setTimeout(() => {
+          router.push('TabelaPaciente');
+        }, 2000);
       } else {
         alert(json.message || "Erro ao criar Paciente");
       }
@@ -70,109 +72,110 @@ export default function CadastrarPaciente() {
     {
       type: "text",
       name: "nome",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none my-5",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
       placeholder: "Nome",
       required: true,
     },
     {
       type: "text",
       name: "cpf",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
       placeholder: "CPF (Apenas dígitos)",
       required: true,
     },
     {
       type: "date",
       name: "dataDeNascimento",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
       placeholder: "Data de Nascimento",
       required: true,
     },
     {
       type: "text",
       name: "cep",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
       placeholder: "CEP",
       required: true,
     },
     {
       type: "text",
       name: "bairro",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
       placeholder: "Bairro",
       required: true,
     },
     {
       type: "text",
       name: "logradouro",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
       placeholder: "logradouro",
       required: true,
     },
     {
       type: "text",
       name: "complemento",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
       placeholder: "Complemento",
       required: true,
     },
     {
       type: "text",
       name: "telefone",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
       placeholder: "Telefone",
       required: true,
+    },
+    {
+      type: "text",
+      id: "telefoneResponsavel1",
+      name: "telefoneResponsavel1",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
+      placeholder: "Telefone do Responsável 1",
+    },
+    {
+      type: "text",
+      id: "telefoneResponsavel2",
+      name: "telefoneResponsavel2",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+      placeholder: "Telefone do Responsável 2 (opcional)",
     },
   ];
 
   return (
-    <div className="flex items-center justify-around flex-wrap min-h-[100vh]">
-      <div className="w-[300px] mb-5">
-        <h1 className="text-2xl font-semibold">
-          Preencha os campos para cadastrar um paciente!
-        </h1> 
-        <form onSubmit={handleForm} className="flex flex-col">
-          {inputs.map((input) => (
-            <InputFieldProps
-              key={input.name}
-              type={input.type}
-              name={input.name}
-              className={input.className}
-              placeholder={input.placeholder}
-              required={input.required}
-              value={form[input.name]}
-              onChange={handleChangeForm}
-            />
-          ))}
 
-          <div className="mb-5">
-            <label
-              className="block mb-2 text-gray-700"
-              htmlFor="telefoneResponsavel1"
-            >
-              Telefones do Responsável:
-            </label>
-            <input
-              type="text"
-              id="telefoneResponsavel1"
-              name="telefoneResponsavel1"
-              className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-2"
-              placeholder="Telefone do Responsável 1"
-              onChange={handleChangeForm}
-            />
-            <input
-              type="text"
-              id="telefoneResponsavel2"
-              name="telefoneResponsavel2"
-              className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none"
-              placeholder="Telefone do Responsável 2 (opcional)"
-              onChange={handleChangeForm}
-            />
+    <div className="flex flex-col items-center justify-center min-h-[100vh]">
+      <h1 className="font-extrabold my-8 text-[#134e58] text-3xl uppercase text-center mx-4 mt-24">
+        Preencha os campos para cadastrar um paciente!
+      </h1>
+      <div className="max-w-[800px] w-full bg-[#005562] p-6 text-white rounded-xl">
+        <form onSubmit={handleForm} className="flex flex-col">
+          <div className="grid grid-cols-2 gap-4">
+            {inputs.map((input) => (
+              <div>
+                <label>{input.placeholder}</label>
+              <InputFieldProps
+                key={input.name}
+                type={input.type}
+                name={input.name}
+                className={input.className}
+                placeholder={input.placeholder}
+                required={input.required}
+                value={form[input.name]}
+                onChange={handleChangeForm}
+                />
+                </div>
+            ))}
           </div>
 
-          <button className="bg-blue-500 p-2.5 mt-2 rounded-lg text-white hover:bg-blue-400">
+          <button className="bg-white p-2.5 mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
             Criar paciente
           </button>
+          <p className="mt-3 text-center text-lg">
+
+            <span className="text-white border-b  cursor-pointer hover:text-gray-400 font-semibold">
+              <Link href={"TabelaPaciente"}>Voltar</Link>
+            </span>
+          </p>
         </form>
         {showSuccessPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
