@@ -68,7 +68,8 @@ export default function TabelaMedicamentos() {
     };
 
     const filteredUsers = medicamentos.filter((medicamento) =>
-        medicamentos.nomeMedicamento.toLowerCase().includes(searchQuery.toLowerCase())
+        medicamento && medicamento.nomeMedicamento &&
+        medicamento.nomeMedicamento.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -76,28 +77,28 @@ export default function TabelaMedicamentos() {
 
             <Navbar />
 
-            <h1 className="text-3xl font-bold text-center mb-8 mt-8">
+            <h1 className="sm:text-5xl text-3xl text-[#005562] font-bold text-center mb-8 mt-8">
                 TABELA DE MEDICAMENTOS
             </h1>
 
             <div className="flex flex-col min-h-screen">
 
-                <h1 className="text-3xl font-bold text-center mb-8 mt-8">
+                <h1 className="sm:text-5xl text-3xl text-[#005562] font-bold text-center mb-8 mt-8">
                     TABELA DE MEDICAMENTOS
                 </h1>
 
-                <div className='flex justify-between gap-5 my-5'>
-                    <div className="flex items-center">
+                <div className='flex justify-start flex-wrap gap-5 my-5 mx-10'>
+                    <div className="flex items-center adjust-buttons">
                         <InputFieldProps
                             type="text"
                             name="searchQuery"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 focus: outline-none pb-3 fix-button ml-16"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 focus: outline-none pb-3 fix-button adjust-buttons focus:border-[#1f616b]"
                             placeholder="Pesquisar por nome"
                             value={searchQuery}
                             onChange={handleChangeForm}
                         />
                     </div>
-                    <button className="bg-blue-500 rounded-lg text-white h-12 text-sm hover:bg-blue-400 px-5 mr-16">
+                    <button className="bg-[#005562] rounded-lg text-white h-12 text-sm transition-all hover:bg-[#1f616b] px-5 adjust-buttons">
                         <Link href="/medicamento/FormCadastroMedicamento">
                             Adicionar Medicamento
                         </Link>
@@ -105,9 +106,9 @@ export default function TabelaMedicamentos() {
 
                 </div>
 
-                <div className="overflow-x-auto shadow-md sm:rounded-lg ml-16 mr-16">
-                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead className="text-xs text-gray-700 uppercase bg-slate-300 dark:text-gray-700">
+                <div className="relative overflow-x-auto shadow-md rounded-lg mx-10">
+                    <table className="w-full text-sm text-left rtl:text-right text-white bg-[#144d54]">
+                        <thead className="text-xs text-white uppercase dark:bg-gray-800 text-center">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
                                     Nome
@@ -129,22 +130,20 @@ export default function TabelaMedicamentos() {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-
-
+                        <tbody className="bg-[#e0f9fb]">
                             {filteredUsers.map((medicamento) => (
-                                <tr key={medicamento.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                <tr key={medicamento.id} className="text-center font-medium text-[#144d54]">
                                     <td className="px-6 py-4">{medicamento.nomeMedicamento}</td>
                                     <td className="px-6 py-4">{medicamento.descricao}</td>
                                     <td className="px-6 py-4">{medicamento.horario}</td>
                                     <td className="px-6 py-4">{medicamento.dosagem}</td>
                                     <td className="px-6 py-4">
-                                        <button onClick={() => handleEdit(medicamento)} className="text-blue-600 hover:text-blue-900 ml-3 flex items-center">
+                                        <button onClick={() => handleEdit(medicamento)} className="text-blue-400 hover:text-blue-600">
                                             <Image src={editar} alt="Editar" width={20} height={20} className="mr-2" />
                                         </button>
                                     </td>
-                                    <td className="px-4 py-4 sm:px-6">
-                                        <button onClick={() => handleDelete(medicamento.id)} className="text-red-600 hover:text-red-900 ml-4 flex items-center">
+                                    <td className="px-6 py-4">
+                                        <button onClick={() => handleDelete(medicamento.id)} className="text-red-400 hover:text-red-600">
                                             <Image src={deletar} alt="Deletar medicamento" width={20} height={20} className="mr-2" />
                                         </button>
                                     </td>

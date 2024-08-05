@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputFieldProps from "@/components/InputFieldProps";
+import { useRouter } from "next/router";
 
 export default function CadastrarMedicamento(){
 
@@ -10,6 +11,7 @@ export default function CadastrarMedicamento(){
         dosagem: '',
     });
 
+    const router = useRouter();
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
     const handleChangeForm = (event) => {
@@ -39,8 +41,9 @@ export default function CadastrarMedicamento(){
             
             if (response.ok) {
                 setShowSuccessPopup(true);
-
-                
+                setTimeout(() => {
+                    router.push('TabelaMedicamentos');
+                }, 2000);    
             } else {
                 alert(json.message || 'Erro ao criar medicamento!');
             }
@@ -67,7 +70,7 @@ export default function CadastrarMedicamento(){
         },
         {
             type: 'text',
-            name: 'Horário',
+            name: 'horario',
             className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
             placeholder: 'Horário',
             required: true,
@@ -83,39 +86,37 @@ export default function CadastrarMedicamento(){
 
     return (
 
-        <div className="flex items-center justify-around flex-wrap min-h-[100vh]">
-            <div className="w-[300px] mb-5">
-                <h1 className="text-2xl font-semibold">
+        <div className="flex flex-col items-center justify-center min-h-[100vh]">
+                <h1 className="font-extrabold my-8 text-[#134e58] text-3xl uppercase text-center mx-4  mt-24">
                     Preencha os campos para cadastrar um medicamento!
                 </h1>
-                <form onSubmit={handleForm} className="flex flex-col">
+            <div className="max-w-[500px] w-full bg-[#005562] p-6 text-white rounded-xl">
+                    <form onSubmit={handleForm} className="flex flex-col">
+                        {inputs.map((input) => (
+                            <InputFieldProps
+                                key={input.name}
+                                type={input.type}
+                                name={input.name}
+                                className={input.className}
+                                placeholder={input.placeholder}
+                                required={input.required}
+                                value={form[input.name]}
+                                onChange={handleChangeForm}
+                            />
+                        ))}
 
+                        <button className="bg-white p-2.5 mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
+                            Criar medicamento
+                        </button>
 
-                    {inputs.map((input) => (
-                        <InputFieldProps
-                            key={input.name}
-                            type={input.type}
-                            name={input.name}
-                            className={input.className}
-                            placeholder={input.placeholder}
-                            required={input.required}
-                            value={form[input.name]}
-                            onChange={handleChangeForm}
-                        />
-                    ))}
-
-                    <button className="bg-blue-500 p-2.5 mt-2 rounded-lg text-white hover:bg-blue-400">
-                        Criar medicamento
-                    </button>
-
-                </form>
-                {showSuccessPopup && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                        <div className="bg-white p-4 rounded shadow-md">
-                            <p>Cadastro do medicamento realizado com sucesso!</p>
+                    </form>
+                    {showSuccessPopup && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                            <div className="bg-white p-4 rounded shadow-md">
+                                <p className='text-black'>Cadastro do medicamento realizado com sucesso!</p>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
             </div>
         </div>
 

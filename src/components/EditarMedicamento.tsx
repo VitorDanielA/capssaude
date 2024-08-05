@@ -35,17 +35,17 @@ const Editar = ({ medicamento, onClose, onSave }) => {
                 <h2 className="text-2xl mb-4">Editar Medicamento</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label className="block text-gray-700">Nome</label>
+                        <label className="block text-gray-700">Nome do medicamento</label>
                         <input
                             type="text"
-                            name="nome"
+                            name="nomeMedicamento"
                             value={formData.nomeMedicamento}
                             onChange={handleChange}
                             className="w-full border border-gray-300 p-2 rounded"
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700">Email</label>
+                        <label className="block text-gray-700">Descrição</label>
                         <input
                             type="text"
                             name="descricao"
@@ -55,7 +55,7 @@ const Editar = ({ medicamento, onClose, onSave }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700">Nível de Acesso</label>
+                        <label className="block text-gray-700">Horário</label>
                         <input
                             type="text"
                             name="horario"
@@ -65,7 +65,7 @@ const Editar = ({ medicamento, onClose, onSave }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700">Nível de Acesso</label>
+                        <label className="block text-gray-700">Dosagem</label>
                         <input
                             type="text"
                             name="dosagem"
