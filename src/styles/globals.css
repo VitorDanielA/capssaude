@@ -22,3 +22,9 @@
         width: 100%;
     }
 }
+
+@media screen and (max-width: 500px){
+    .fix-form-paciente{
+        max-width: 350px !important;
+    }
+}

@@ -72,56 +72,56 @@ export default function CadastrarPaciente() {
     {
       type: "text",
       name: "nome",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
       placeholder: "Nome",
       required: true,
     },
     {
       type: "text",
       name: "cpf",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
-      placeholder: "CPF (Apenas dígitos)",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
+      placeholder: "CPF",
       required: true,
     },
     {
       type: "date",
       name: "dataDeNascimento",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
-      placeholder: "Data de Nascimento",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
+      placeholder: "Data Nascimento",
       required: true,
     },
     {
       type: "text",
       name: "cep",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
       placeholder: "CEP",
       required: true,
     },
     {
       type: "text",
       name: "bairro",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
       placeholder: "Bairro",
       required: true,
     },
     {
       type: "text",
       name: "logradouro",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
       placeholder: "logradouro",
       required: true,
     },
     {
       type: "text",
       name: "complemento",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
       placeholder: "Complemento",
       required: true,
     },
     {
       type: "text",
       name: "telefone",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
       placeholder: "Telefone",
       required: true,
     },
@@ -129,30 +129,30 @@ export default function CadastrarPaciente() {
       type: "text",
       id: "telefoneResponsavel1",
       name: "telefoneResponsavel1",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-1",
-      placeholder: "Telefone do Responsável 1",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
+      placeholder: "Telefone Responsável 1",
     },
     {
       type: "text",
       id: "telefoneResponsavel2",
       name: "telefoneResponsavel2",
-      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
-      placeholder: "Telefone do Responsável 2 (opcional)",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-5",
+      placeholder: "Telefone Responsável 2",
     },
   ];
 
   return (
 
     <div className="flex flex-col items-center justify-center min-h-[100vh]">
-      <h1 className="font-extrabold my-8 text-[#134e58] text-3xl uppercase text-center mx-4 mt-24">
+      <h1 className="font-extrabold my-8 text-[#134e58] text-3xl uppercase text-center mt-24">
         Preencha os campos para cadastrar um paciente!
       </h1>
-      <div className="max-w-[800px] w-full bg-[#005562] p-6 text-white rounded-xl">
+      <div className="max-w-[800px] w-full bg-[#005562] p-6 text-white rounded-xl mb-10 fix-form-paciente">
         <form onSubmit={handleForm} className="flex flex-col">
           <div className="grid grid-cols-2 gap-4">
-            {inputs.map((input) => (
-              <div>
-                <label>{input.placeholder}</label>
+            {inputs.map((input, index) => (
+              <div key={index}>
+                <label className="">{input.placeholder}</label>
               <InputFieldProps
                 key={input.name}
                 type={input.type}
