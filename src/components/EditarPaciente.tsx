@@ -51,63 +51,63 @@ const Editar = ({ paciente, onClose, onSave }) => {
         {
             type: "text",
             name: "nome",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none my-5",
+            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "Nome",
             required: true,
         },
         {
             type: "text",
             name: "cpf",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "CPF",
             required: true,
         },
         {
             type: "date",
             name: "dataDeNascimento",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "Data de Nascimento",
             required: true,
         },
         {
             type: "text",
             name: "cep",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "CEP",
             required: true,
         },
         {
             type: "text",
             name: "bairro",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "Bairro",
             required: true,
         },
         {
             type: "text",
             name: "logradouro",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "logradouro",
             required: true,
         },
         {
             type: "text",
             name: "complemento",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "Complemento",
             required: true,
         },
         {
             type: "text",
             name: "telefone",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5",
+            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "Telefone",
             required: true,
         },
         {
             type: 'text',
             name: 'telefonesEmergencia1',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1',
             placeholder: 'Telefone do Responsável 1',
             required: false,
             value: formData.telefonesEmergencia[0] || '',
@@ -123,33 +123,40 @@ const Editar = ({ paciente, onClose, onSave }) => {
     ];
 
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white w-[600px] p-10 mb-5 rounded shadow-lg">
-                <h1 className="text-2xl font-semibold">Editar Paciente</h1>
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+            <div className="max-w-[800px] w-full bg-[#005562] p-6 text-white rounded-xl mb-10 fix-form-paciente">
+                <h1 className="font-extrabold my-5 text-white text-3xl uppercase text-center mt-24">Editar Paciente</h1>
                 <form onSubmit={handleSubmit} >
-
+                    <div className='grid grid-cols-2 gap-4'>
                     {inputs.map((input) => (
+                        <label htmlFor="">
+                            {input.placeholder}
                         <InputFieldProps
-                            key={input.name}
-                            type={input.type}
-                            name={input.name}
-                            className={input.className}
-                            placeholder={input.placeholder}
-                            required={input.required}
-                            value={formData[input.name]}
-                            onChange={handleChange}
+                        key={input.name}
+                        type={input.type}
+                        name={input.name}
+                        className={input.className}
+                        placeholder={input.placeholder}
+                        required={input.required}
+                        value={formData[input.name]}
+                        onChange={handleChange}
                         />
+                        </label>
                     ))}
 
+                    </div>
 
                     <div className="flex justify-center">
-                        <button type="button" onClick={onClose} className="mr-4 text-gray-600 hover:text-gray-900">
-                            Cancelar
-                        </button>
-                        <button type="submit" className="bg-blue-600 text-white p-2 rounded">
+                        <button type="submit" className="bg-white p-2.5 mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
                             Salvar
                         </button>
+                        <button type="button" onClick={onClose} className="text-white border-b  cursor-pointer hover:text-gray-400 font-semibold">
+                            Cancelar
+                        </button>
+          
                     </div>
+
+
                 </form>
             </div>
         </div>

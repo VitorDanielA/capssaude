@@ -133,9 +133,9 @@ export default function CadastrarConsulta() {
                     <div className="grid grid-cols-2 gap-4">
 
 
-                        {inputs.map((input, index) => (
-                            <div key={index}>
-                                <label className="">{input.placeholder}</label>                            <InputFieldProps
+                        {inputs.map((input) => (
+                            <label className="">{input.placeholder}
+                                <InputFieldProps
                                     key={input.name}
                                     type={input.type}
                                     name={input.name}
@@ -145,7 +145,8 @@ export default function CadastrarConsulta() {
                                     value={form[input.name]}
                                     onChange={handleChangeForm}
                                 />
-                            </div>
+                            </label>
+
                         ))}
                     </div>
 

@@ -79,6 +79,8 @@ export default function Cadastrar() {
             <div className="max-w-[500px] w-full bg-[#005562] p-6 text-white rounded-xl">
                 <form onSubmit={handleForm} className="flex flex-col">
                 {inputs.map((input) => (
+                    <label htmlFor="">
+                        {input.placeholder}
                     <InputFieldProps
                         key={input.name}
                         type={input.type}
@@ -88,9 +90,11 @@ export default function Cadastrar() {
                         required={input.required}
                         value={form[input.name]}
                         onChange={handleChangeForm}
-                    />
+                        />
+                        </label>
                 ))}
 
+                    <label htmlFor="">NIvel de acesso</label>
                     <select
                         name="nivelAcesso"
                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5"

@@ -57,7 +57,7 @@ export default function CadastrarMedicamento(){
         {
             type: 'text',
             name: 'nomeMedicamento',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none my-5',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
             placeholder: 'Nome do medicamento',
             required: true,
         },
@@ -93,6 +93,8 @@ export default function CadastrarMedicamento(){
             <div className="max-w-[500px] w-full bg-[#005562] p-6 text-white rounded-xl">
                     <form onSubmit={handleForm} className="flex flex-col">
                         {inputs.map((input) => (
+                            <label htmlFor="">
+                                    {input.placeholder}
                             <InputFieldProps
                                 key={input.name}
                                 type={input.type}
@@ -102,7 +104,8 @@ export default function CadastrarMedicamento(){
                                 required={input.required}
                                 value={form[input.name]}
                                 onChange={handleChangeForm}
-                            />
+                                />
+                                </label>
                         ))}
 
                         <button className="bg-white p-2.5 mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">

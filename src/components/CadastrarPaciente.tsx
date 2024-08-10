@@ -150,9 +150,9 @@ export default function CadastrarPaciente() {
       <div className="max-w-[800px] w-full bg-[#005562] p-6 text-white rounded-xl mb-10 fix-form-paciente">
         <form onSubmit={handleForm} className="flex flex-col">
           <div className="grid grid-cols-2 gap-4">
-            {inputs.map((input, index) => (
-              <div key={index}>
-                <label className="">{input.placeholder}</label>
+            {inputs.map((input) => (
+              
+                <label className="">{input.placeholder}
               <InputFieldProps
                 key={input.name}
                 type={input.type}
@@ -163,7 +163,8 @@ export default function CadastrarPaciente() {
                 value={form[input.name]}
                 onChange={handleChangeForm}
                 />
-                </div>
+                </label>
+                
             ))}
           </div>
 
