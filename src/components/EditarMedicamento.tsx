@@ -1,4 +1,5 @@
 import { useState } from "react";
+import InputFieldProps from "./InputFieldProps";
 
 const Editar = ({ medicamento, onClose, onSave }) => {
     const [formData, setFormData] = useState({ ...medicamento });
@@ -29,58 +30,66 @@ const Editar = ({ medicamento, onClose, onSave }) => {
         }
     };
 
+    const inputs = [
+        {
+            type: 'text',
+            name: 'nomeMedicamento',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            placeholder: 'Nome do medicamento',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'descricao',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            placeholder: 'Descrição',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'horario',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            placeholder: 'Horário',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'dosagem',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            placeholder: 'Dosagem',
+            required: true,
+        }
+    ];
+
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-4 rounded shadow-lg">
-                <h2 className="text-2xl mb-4">Editar Medicamento</h2>
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+            <div className="max-w-[500px] w-full bg-[#005562] p-6 text-white rounded-xl mb-5">
+                <h1 className="font-extrabold my-5 text-white text-3xl uppercase text-center mt-10">Editar Medicamento</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Nome do medicamento</label>
-                        <input
-                            type="text"
-                            name="nomeMedicamento"
-                            value={formData.nomeMedicamento}
-                            onChange={handleChange}
-                            className="w-full border border-gray-300 p-2 rounded"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Descrição</label>
-                        <input
-                            type="text"
-                            name="descricao"
-                            value={formData.descricao}
-                            onChange={handleChange}
-                            className="w-full border border-gray-300 p-2 rounded"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Horário</label>
-                        <input
-                            type="text"
-                            name="horario"
-                            value={formData.horario}
-                            onChange={handleChange}
-                            className="w-full border border-gray-300 p-2 rounded"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Dosagem</label>
-                        <input
-                            type="text"
-                            name="dosagem"
-                            value={formData.dosagem}
-                            onChange={handleChange}
-                            className="w-full border border-gray-300 p-2 rounded"
-                        />
-                    </div>
-                    <div className="flex justify-end">
-                        <button type="button" onClick={onClose} className="mr-4 text-gray-600 hover:text-gray-900">
-                            Cancelar
-                        </button>
-                        <button type="submit" className="bg-blue-600 text-white p-2 rounded">
+                {inputs.map((input) => (
+                        <label htmlFor="">
+                            {input.placeholder}
+                            <InputFieldProps
+                                key={input.name}
+                                type={input.type}
+                                name={input.name}
+                                className={input.className}
+                                placeholder={input.placeholder}
+                                required={input.required}
+                                value={formData[input.name]}
+                                onChange={handleChange}
+                            />
+                        </label>
+                    ))}
+                    
+                    <div className="flex justify-center">
+                        <button type="submit" className="bg-white p-2.5 mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
                             Salvar
                         </button>
+                        <button type="button" onClick={onClose} className="text-white border-b  cursor-pointer hover:text-gray-400 font-semibold">
+                            Cancelar
+                        </button>
+
                     </div>
                 </form>
             </div>

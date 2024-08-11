@@ -107,7 +107,7 @@ const Editar = ({ paciente, onClose, onSave }) => {
         {
             type: 'text',
             name: 'telefonesEmergencia1',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-5',
             placeholder: 'Telefone do Responsável 1',
             required: false,
             value: formData.telefonesEmergencia[0] || '',
@@ -115,7 +115,7 @@ const Editar = ({ paciente, onClose, onSave }) => {
           {
             type: 'text',
             name: 'telefonesEmergencia2',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-5',
             placeholder: 'Telefone do Responsável 2',
             required: false,
             value: formData.telefonesEmergencia[1] || '',
@@ -125,7 +125,7 @@ const Editar = ({ paciente, onClose, onSave }) => {
     return (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
             <div className="max-w-[800px] w-full bg-[#005562] p-6 text-white rounded-xl mb-10 fix-form-paciente">
-                <h1 className="font-extrabold my-5 text-white text-3xl uppercase text-center mt-24">Editar Paciente</h1>
+                <h1 className="font-extrabold my-5 text-white text-3xl uppercase text-center mt-2">Editar Paciente</h1>
                 <form onSubmit={handleSubmit} >
                     <div className='grid grid-cols-2 gap-4'>
                     {inputs.map((input) => (
