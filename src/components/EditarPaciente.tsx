@@ -147,15 +147,14 @@ const Editar = ({ paciente, onClose, onSave }) => {
                     </div>
 
                     <div className="flex justify-center">
-                        <button type="submit" className="bg-white p-2.5 mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
+                        <button type="submit" className="bg-white p-2.5 w-full mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold ml-20 mr-10">
                             Salvar
                         </button>
-                        <button type="button" onClick={onClose} className="text-white border-b  cursor-pointer hover:text-gray-400 font-semibold">
+                        <button type="button" onClick={onClose} className="bg-gray-800 p-2.5 w-full mt-2 hover:text-gray-400 text-xl rounded-lg font-semibold ml-2 mr-20">
                             Cancelar
                         </button>
-          
-                    </div>
 
+                    </div>
 
                 </form>
             </div>

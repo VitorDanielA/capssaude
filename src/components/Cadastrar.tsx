@@ -57,14 +57,14 @@ export default function Cadastrar() {
         {
           type: 'email',
           name: 'email',
-          className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+          className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5 mt-2',
           placeholder: 'Email',
           required: true,
         },
         {
           type: 'password',
           name: 'senha',
-          className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+          className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5 mt-2',
           placeholder: 'Senha',
           required: true,
         },
@@ -94,10 +94,10 @@ export default function Cadastrar() {
                         </label>
                 ))}
 
-                    <label htmlFor="">NIvel de acesso</label>
+                    <label htmlFor="">Nivel de acesso</label>
                     <select
                         name="nivelAcesso"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5 mt-2"
                         required
                         value={form.nivelAcesso}
                         onChange={handleChangeForm}

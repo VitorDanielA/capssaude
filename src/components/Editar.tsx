@@ -1,6 +1,7 @@
 import { updateUser } from '@/helpers/usuario';
 import { useState } from 'react';
 import InputFieldProps from './InputFieldProps';
+import Link from 'next/link';
 
 const Editar = ({ usuario, onClose, onSave }) => {
     const [formData, setFormData] = useState({ ...usuario });
@@ -36,14 +37,14 @@ const Editar = ({ usuario, onClose, onSave }) => {
         {
             type: 'email',
             name: 'email',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5 mt-2',
             placeholder: 'Email',
             required: true,
         },
         {
             type: 'password',
             name: 'senha',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5 mt-2',
             placeholder: 'Senha',
             required: true,
         },
@@ -73,10 +74,10 @@ const Editar = ({ usuario, onClose, onSave }) => {
                         </label>
                     ))}
 
-                    <label htmlFor="">NIvel de acesso</label>
+                    <label htmlFor="">Nivel de acesso</label>
                     <select
                         name="nivelAcesso"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5 mt-2"
                         required
                         value={formData.nivelAcesso}
                         onChange={handleChange}
@@ -88,14 +89,15 @@ const Editar = ({ usuario, onClose, onSave }) => {
 
 
                     <div className="flex justify-center">
-                        <button type="submit" className="bg-white p-2.5 mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
+                        <button type="submit" className="bg-white p-2.5 w-full mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold ml-2 mr-2">
                             Salvar
                         </button>
-                        <button type="button" onClick={onClose} className="text-white border-b  cursor-pointer hover:text-gray-400 font-semibold">
+                        <button type="button" onClick={onClose} className="bg-gray-800 p-2.5 w-full mt-2 hover:text-gray-400 text-xl rounded-lg font-semibold ml-2 mr-2">
                             Cancelar
                         </button>
 
                     </div>
+                    
                 </form>
             </div>
         </div>

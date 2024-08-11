@@ -34,28 +34,28 @@ const Editar = ({ medicamento, onClose, onSave }) => {
         {
             type: 'text',
             name: 'nomeMedicamento',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-5',
             placeholder: 'Nome do medicamento',
             required: true,
         },
         {
             type: 'text',
             name: 'descricao',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-5',
             placeholder: 'Descrição',
             required: true,
         },
         {
             type: 'text',
             name: 'horario',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-5',
             placeholder: 'Horário',
             required: true,
         },
         {
             type: 'text',
             name: 'dosagem',
-            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mb-5',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-5',
             placeholder: 'Dosagem',
             required: true,
         }
@@ -83,10 +83,10 @@ const Editar = ({ medicamento, onClose, onSave }) => {
                     ))}
                     
                     <div className="flex justify-center">
-                        <button type="submit" className="bg-white p-2.5 mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
+                        <button type="submit" className="bg-white p-2.5 w-full mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold ml-2 mr-2">
                             Salvar
                         </button>
-                        <button type="button" onClick={onClose} className="text-white border-b  cursor-pointer hover:text-gray-400 font-semibold">
+                        <button type="button" onClick={onClose} className="bg-gray-800 p-2.5 w-full mt-2 hover:text-gray-400 text-xl rounded-lg font-semibold ml-2 mr-2">
                             Cancelar
                         </button>
 
