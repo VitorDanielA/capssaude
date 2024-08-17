@@ -94,7 +94,7 @@ export default function TabelaEnfermeiro() {
                         />
                     </div>
                     <button className="bg-[#005562] rounded-lg text-white h-12 text-sm transition-all hover:bg-[#1f616b] px-5 adjust-buttons">
-                        <Link href="/psicologo/FormCadastroPsicologo">
+                        <Link href="/enfermeiro/FormCadastrarEnfermeiro">
                             Adicionar Enfermeiro
                         </Link>
                     </button>
