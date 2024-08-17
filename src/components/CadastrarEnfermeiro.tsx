@@ -203,7 +203,7 @@ export default function CadastrarEnfermeiro() {
           </button>
           <p className="mt-3 text-center text-lg">
             <span className="text-white border-b cursor-pointer hover:text-gray-400 font-semibold">
-              <Link href={"TabelaPsicologo"}>Voltar</Link>
+              <Link href={"TabelaEnfermeiro"}>Voltar</Link>
             </span>
           </p>
         </form>
