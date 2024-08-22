@@ -66,7 +66,7 @@ export const updateEnfermeiro = async (id: number, formData: any): Promise<{ ok:
             },
             body: JSON.stringify(formData),
         });
-
+        console.log(formData)
         const json = await response.json();
         return { ok: response.ok, json };
     } catch (error) {

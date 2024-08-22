@@ -6,15 +6,11 @@ import { updateEnfermeiro } from '@/helpers/enfermeiro';
 const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }) => {
     const [formData, setFormData] = useState({
         ...enfermeiro,
-        diasDisponiveis: enfermeiro.diasDisponiveis.join(', '),
-        horariosDisponiveis: enfermeiro.horariosDisponiveis.join(', '),
     });
 
     useEffect(() => {
         setFormData({
             ...enfermeiro,
-            diasDisponiveis: enfermeiro.diasDisponiveis.join(', '),
-            horariosDisponiveis: enfermeiro.horariosDisponiveis.join(', '),
         });
     }, [enfermeiro]);
 
@@ -22,9 +18,10 @@ const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }) => {
         const { name, value } = e.target;
 
         if (name === 'diasDisponiveis' || name === 'horariosDisponiveis') {
+            const newList = value.split(',').map(item => item.trim());
             setFormData(prev => ({
                 ...prev,
-                [name]: value,
+                [name]: newList,
             }));
         } else {
             setFormData(prev => ({
@@ -38,8 +35,6 @@ const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }) => {
         e.preventDefault();
         const updatedData = {
             ...formData,
-            diasDisponiveis: formData.diasDisponiveis.split(',').map(item => item.trim()),
-            horariosDisponiveis: formData.horariosDisponiveis.split(',').map(item => item.trim()),
         };
 
         try {
@@ -48,6 +43,7 @@ const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }) => {
             if (ok) {
                 onSave(json);
             } else {
+                
                 console.error('Erro ao atualizar enfermeiro');
             }
         } catch (error) {
