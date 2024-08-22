@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import InputFieldProps from "@/components/InputFieldProps";
+import { updatePaciente } from '@/helpers/paciente';
 
 const Editar = ({ paciente, onClose, onSave }) => {
     const [formData, setFormData] = useState({
          ...paciente,
          telefonesEmergencia: paciente.telefonesEmergencia || [],
         });
+
 
         const handleChange = (e) => {
             const { name, value } = e.target;
@@ -25,21 +27,14 @@ const Editar = ({ paciente, onClose, onSave }) => {
             }
           };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: {preventDefault: () => void;}) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:8080/caps/paciente/${formData.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            if (response.ok) {
-                const updatedPaciente = await response.json();
-                onSave(updatedPaciente);
-            } else {
-                console.error('Erro ao atualizar paciente');
+            const { ok, json } = await updatePaciente(formData.id, formData);
+            if(ok){
+                onSave(json);
+            }else{
+                console.error('erro ao atualizar paciente')
             }
         } catch (error) {
             console.error('Erro ao atualizar paciente:', error);

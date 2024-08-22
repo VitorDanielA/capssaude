@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 import Navbar from '@/components/Navbar';
 import { Inter } from 'next/font/google';
 import Editar from '@/components/EditarPaciente';
@@ -7,6 +7,7 @@ import editar from '@/assets/editar.png';
 import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import { deletePaciente, fetchPacientes } from '@/helpers/paciente';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,55 +17,36 @@ export default function TabelaPaciente() {
     const [editPaciente, setEditPaciente] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
-
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/caps/paciente', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const data: {
-                    nome: string;
-                    cpf: string;
-                    dataDeNascimento: Date;
-                    cep: string;
-                    bairro: string;
-                    logradouro: string;
-                    telefone: string;
-                    telefonesEmergencia: string[];
-                }[] = await response.json();
+          try{
+              const data = await fetchPacientes();
                 setPacientes(data);
-            } catch (error) {
-                console.error('Erro ao buscar pacientes:', error);
-            }
+                    
+                }catch(err){
+                    console.log('Erro ao buscar pacientes',err);
+                }
+           
         };
 
         fetchData();
     }, []);
 
-    const handleEdit = (paciente) => {
+    const handleEdit = (paciente: SetStateAction<null>) => {
         setSelectedPaciente(paciente);
         setEditPaciente(true);
     };
 
     const handleDelete = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/caps/paciente/${id}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
+            const sucess = await deletePaciente(id);
+            if (sucess) {
                 setPacientes(pacientes.filter(paciente => paciente.id !== id));
             } else {
                 console.error('Erro ao excluir paciente');
             }
-        } catch (error) {
-            console.error('Erro ao excluir paciente:', error);
-        }
     };
 
-    const handleChangeForm = (event) => {
+    const handleChangeForm = (event: {target: {name: any; value: any; };}) => {
         const { name, value } = event.target;
 
         if (name === 'searchQuery') {
@@ -73,7 +55,7 @@ export default function TabelaPaciente() {
         }
     };
 
-    const filteredUsers = pacientes.filter((paciente) =>
+    const filteredPacientes = pacientes.filter((paciente) =>
         paciente.nome.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
@@ -117,7 +99,7 @@ export default function TabelaPaciente() {
                             </tr>
                         </thead>
                         <tbody className='bg-[#e0f9fb]'>
-                            {filteredUsers.map((paciente, index) => (
+                            {filteredPacientes.map((paciente, index) => (
                                 <tr key={index} className="text-center font-medium text-[#144d54]">
                                     <th scope="row" className="px-6 py-4 whitespace-nowrap">
                                         {paciente.nome}
@@ -173,8 +155,8 @@ export default function TabelaPaciente() {
                 <Editar
                     paciente={selectedPaciente}
                     onClose={() => setEditPaciente(false)}
-                    onSave={(updatedUser) => {
-                        setPacientes(pacientes.map(paciente => (paciente.id === updatedUser.id ? updatedUser : paciente)));
+                    onSave={(updatedPaciente) => {
+                        setPacientes(pacientes.map(paciente => (paciente.id === updatedPaciente.id ? updatedPaciente : paciente)));
                         setEditPaciente(false);
                     }}
                 />
