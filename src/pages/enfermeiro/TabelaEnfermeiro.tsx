@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 import Navbar from '@/components/Navbar';
 import { Inter } from 'next/font/google';
 import Editar from '@/components/EditarEnfermeiro';
@@ -7,6 +7,8 @@ import editar from '@/assets/editar.png';
 import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import { deleteEnfermeiro, fetchEnfermeiros } from '@/helpers/enfermeiro';
+import { fetchPacientes } from '@/helpers/paciente';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,18 +21,7 @@ export default function TabelaEnfermeiro() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/caps/enfermeiro', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const data: {
-                    id: string;
-                    nome: string;
-                    coren: string;
-                    diasDisponiveis: string[];
-                    horariosDisponiveis: string[];
-                }[] = await response.json();
+                const data = await fetchEnfermeiros();
                 setEnfermeiros(data);
             } catch (error) {
                 console.error('Erro ao buscar enfermeiros:', error);
@@ -40,27 +31,21 @@ export default function TabelaEnfermeiro() {
         fetchData();
     }, []);
 
-    const handleEdit = (enfermeiro) => {
+    const handleEdit = (enfermeiro: SetStateAction<null>) => {
         setSelectedEnfermeiro(enfermeiro);
         setEditEnfermeiro(true);
     };
 
     const handleDelete = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/caps/enfermeiro/${id}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
+      const  sucess = await deleteEnfermeiro(id);
+            if (sucess) {
                 setEnfermeiros(enfermeiros.filter(enfermeiro => enfermeiro.id !== id));
             } else {
                 console.error('Erro ao excluir enfermeiro');
             }
-        } catch (error) {
-            console.error('Erro ao excluir enfermeiro:', error);
-        }
     };
 
-    const handleChangeForm = (event) => {
+    const handleChangeForm = (event: {target: {name: any; value: any; };})  => {
         const { name, value } = event.target;
 
         if (name === 'searchQuery') {

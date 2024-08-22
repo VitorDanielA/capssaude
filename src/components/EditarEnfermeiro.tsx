@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import InputFieldProps from "@/components/InputFieldProps";
+import { updateEnfermeiro } from '@/helpers/enfermeiro';
+
 
 const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }) => {
     const [formData, setFormData] = useState({
@@ -32,7 +34,7 @@ const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }) => {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: {preventDefault: () => void;}) => {
         e.preventDefault();
         const updatedData = {
             ...formData,
@@ -41,17 +43,10 @@ const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }) => {
         };
 
         try {
-            const response = await fetch(`http://localhost:8080/caps/enfermeiro/${updatedData.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedData),
-            });
-
-            if (response.ok) {
-                const updatedPsicologo = await response.json();
-                onSave(updatedPsicologo);
+            const { ok, json } = await updateEnfermeiro(formData.id, formData);
+           
+            if (ok) {
+                onSave(json);
             } else {
                 console.error('Erro ao atualizar enfermeiro');
             }

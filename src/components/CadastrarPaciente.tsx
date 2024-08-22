@@ -42,8 +42,7 @@ export default function CadastrarPaciente() {
     console.log(form);
 
     try {
-
-      const {ok, json} = await createPaciente(form);
+      const { ok, json } = await createPaciente(form);
       console.log(json);
 
       if (ok) {
@@ -143,20 +142,20 @@ export default function CadastrarPaciente() {
         <form onSubmit={handleForm} className="flex flex-col">
           <div className="grid grid-cols-2 gap-4">
             {inputs.map((input) => (
-              
-                <label className="">{input.placeholder}
-              <InputFieldProps
-                key={input.name}
-                type={input.type}
-                name={input.name}
-                className={input.className}
-                placeholder={input.placeholder}
-                required={input.required}
-                value={form[input.name]}
-                onChange={handleChangeForm}
+
+              <label className="">{input.placeholder}
+                <InputFieldProps
+                  key={input.name}
+                  type={input.type}
+                  name={input.name}
+                  className={input.className}
+                  placeholder={input.placeholder}
+                  required={input.required}
+                  value={form[input.name]}
+                  onChange={handleChangeForm}
                 />
-                </label>
-                
+              </label>
+
             ))}
           </div>
 
