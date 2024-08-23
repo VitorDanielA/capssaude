@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 import Navbar from '@/components/Navbar';
 import { Inter } from 'next/font/google';
 import Editar from '@/components/EditarPsicologo';
@@ -7,11 +7,18 @@ import editar from '@/assets/editar.png';
 import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import { deletePsicologo, fetchPsicologos } from '@/helpers/psicologo';
 
-const inter = Inter({ subsets: ['latin'] });
+interface psicologoProps {
+    id: number;
+    nome: string;
+    crp: string;
+    diasDisponiveis: string[];
+    horariosDisponiveis: string[];
+}
 
 export default function TabelaPsicologo() {
-    const [psicologos, setPsicologos] = useState([]);
+    const [psicologos, setPsicologos] = useState<psicologoProps[]>([]);
     const [selectedPsicologo, setSelectedPsicologo] = useState(null);
     const [editPsicologo, setEditPsicologo] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -19,18 +26,7 @@ export default function TabelaPsicologo() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/caps/psicologo', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const data: {
-                    id: string;
-                    nome: string;
-                    crp: string;
-                    diasDisponiveis: string[];
-                    horariosDisponiveis: string[];
-                }[] = await response.json();
+                const data = await fetchPsicologos();
                 setPsicologos(data);
             } catch (error) {
                 console.error('Erro ao buscar psicólogos:', error);
@@ -40,27 +36,21 @@ export default function TabelaPsicologo() {
         fetchData();
     }, []);
 
-    const handleEdit = (psicologo) => {
+    const handleEdit = (psicologo: SetStateAction<null>) => {
         setSelectedPsicologo(psicologo);
         setEditPsicologo(true);
     };
 
-    const handleDelete = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/caps/psicologo/${id}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
+    const handleDelete = async (id: number) => {
+            const sucess = await deletePsicologo(id);
+            if (sucess) {
                 setPsicologos(psicologos.filter(psicologo => psicologo.id !== id));
             } else {
                 console.error('Erro ao excluir psicólogo');
             }
-        } catch (error) {
-            console.error('Erro ao excluir psicólogo:', error);
-        }
     };
 
-    const handleChangeForm = (event) => {
+    const handleChangeForm = (event: {target: {name: any; value: any; };}) => {
         const { name, value } = event.target;
 
         if (name === 'searchQuery') {
@@ -133,7 +123,7 @@ export default function TabelaPsicologo() {
                                     </td>
                                     <td className="px-6 py-4">
                                         <button onClick={() => handleDelete(psicologo.id)} className="text-red-400 hover:text-red-600">
-                                            <Image src={deletar} alt="Deletar psicólogo" width={24}/>
+                                            <Image src={deletar} alt="Deletar psicólogo" width={24} />
                                         </button>
                                     </td>
                                 </tr>
