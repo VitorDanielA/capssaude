@@ -8,12 +8,17 @@ import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import { deleteEnfermeiro, fetchEnfermeiros } from '@/helpers/enfermeiro';
-import { fetchPacientes } from '@/helpers/paciente';
 
-const inter = Inter({ subsets: ['latin'] });
+interface enfermeiroProps{
+    id: number;
+    nome: string;
+    coren: string;
+    diasDisponiveis: string[];
+    horariosDisponiveis: string[];
+}
 
 export default function TabelaEnfermeiro() {
-    const [enfermeiros, setEnfermeiros] = useState([]);
+    const [enfermeiros, setEnfermeiros] = useState<enfermeiroProps[]>([]);
     const [selectedEnfermeiro, setSelectedEnfermeiro] = useState(null);
     const [editEnfermeiro, setEditEnfermeiro] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -36,7 +41,7 @@ export default function TabelaEnfermeiro() {
         setEditEnfermeiro(true);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id: number) => {
       const  sucess = await deleteEnfermeiro(id);
             if (sucess) {
                 setEnfermeiros(enfermeiros.filter(enfermeiro => enfermeiro.id !== id));

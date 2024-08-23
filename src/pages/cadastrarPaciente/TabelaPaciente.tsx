@@ -9,10 +9,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { deletePaciente, fetchPacientes } from '@/helpers/paciente';
 
-const inter = Inter({ subsets: ['latin'] });
+interface pacienteProps{
+    id: number;
+    nome: string;
+    cpf: string;
+    dataDeNascimento: Date;
+    cep: string;
+    bairro: string;
+    logradouro: string;
+    telefone: string;
+    telefonesEmergencia: string[];
+}
 
 export default function TabelaPaciente() {
-    const [pacientes, setPacientes] = useState([]);
+    const [pacientes, setPacientes] = useState<pacienteProps[]>([]);
     const [selectedPaciente, setSelectedPaciente] = useState(null);
     const [editPaciente, setEditPaciente] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -37,7 +47,7 @@ export default function TabelaPaciente() {
         setEditPaciente(true);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id: number) => {
             const sucess = await deletePaciente(id);
             if (sucess) {
                 setPacientes(pacientes.filter(paciente => paciente.id !== id));

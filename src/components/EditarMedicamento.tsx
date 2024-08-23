@@ -1,27 +1,21 @@
 import { useState } from "react";
 import InputFieldProps from "./InputFieldProps";
+import { updateMedicamento } from "@/helpers/medicamento";
 
 const Editar = ({ medicamento, onClose, onSave }) => {
     const [formData, setFormData] = useState({ ...medicamento });
 
-    const handleChange = (e) => {
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData((prev: any) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:8080/caps/medicamento/${formData.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            if (response.ok) {
-                const updatedUser = await response.json();
-                onSave(updatedUser);
+          const {ok, json} = await updateMedicamento(formData.id, formData);
+            if (ok) {
+                onSave(json);
             } else {
                 console.error('Erro ao atualizar medicamento');
             }

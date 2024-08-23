@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import InputFieldProps from '@/components/InputFieldProps';
 import Link from "next/link";
 import Image from "next/image";
@@ -7,58 +7,50 @@ import Editar from '@/components/EditarMedicamento';
 import editar from '@/assets/editar.png';
 import deletar from '@/assets/deletar.png';
 import Footer from "@/components/Footer";
+import { deleteMedicamento, fetchMedicamentos } from "@/helpers/medicamento";
+
+interface medicamentoProps {
+    id: number;
+    nomeMedicamento: string;
+    descricao: string;
+    horario: string;
+    dosagem: string;
+}
 
 export default function TabelaMedicamentos() {
-
-    const [medicamentos, setMedicamentos] = useState([]);
+    const [medicamentos, setMedicamentos] = useState<medicamentoProps[]>([]);
     const [selectedMedicamento, setSelectedMedicamento] = useState(null);
     const [editMedicamento, setEditMedicamento] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        const fetchData = async () => {
+        const loadMedicamentos = async () => {
             try {
-                const response = await fetch('http://localhost:8080/caps/medicamento', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const data: {
-                    nomeMedicamento: string;
-                    descricao: string;
-                    horario: string;
-                    dosagem: string;
-                }[] = await response.json();
+                const data = await fetchMedicamentos();
                 setMedicamentos(data);
             } catch (error) {
                 console.error('Erro ao buscar medicamentos:', error);
             }
         };
 
-        fetchData();
+        loadMedicamentos();
     }, []);
 
-    const handleEdit = (medicamento) => {
+    const handleEdit = (medicamento: SetStateAction<null>) => {
         setSelectedMedicamento(medicamento);
         setEditMedicamento(true);
     };
 
-    const handleDelete = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/caps/medicamento/${id}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
-                setMedicamentos(medicamentos.filter(medicamento => medicamento.id !== id));
-            } else {
-                console.error('Erro ao excluir medicamento');
-            }
-        } catch (error) {
-            console.error('Erro ao excluir medicamento:', error);
+    const handleDelete = async (id: number) => {
+        const success = await deleteMedicamento(id);
+        if (success) {
+            setMedicamentos(medicamentos.filter(medicamento => medicamento.id !== id));
+        } else {
+            console.error('Erro ao excluir medicamento');
         }
     };
 
-    const handleChangeForm = (event) => {
+    const handleChangeForm = (event: { target: { name: any; value: any; }; }) => {
         const { name, value } = event.target;
 
         if (name === 'searchQuery') {
@@ -68,7 +60,6 @@ export default function TabelaMedicamentos() {
     };
 
     const filteredUsers = medicamentos.filter((medicamento) =>
-        medicamento && medicamento.nomeMedicamento &&
         medicamento.nomeMedicamento.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
@@ -156,14 +147,14 @@ export default function TabelaMedicamentos() {
 
             </div>
 
-            <Footer/>
+            <Footer />
 
             {editMedicamento && (
                 <Editar
                     medicamento={selectedMedicamento}
                     onClose={() => setEditMedicamento(false)}
-                    onSave={(updatedUser) => {
-                        setMedicamentos(medicamentos.map(medicamento => (medicamento.id === updatedUser.id ? updatedUser : medicamento)));
+                    onSave={(updatedMedicamento) => {
+                        setMedicamentos(medicamentos.map(medicamento => (medicamento.id === updatedMedicamento.id ? updatedMedicamento : medicamento)));
                         setEditMedicamento(false);
                     }}
                 />

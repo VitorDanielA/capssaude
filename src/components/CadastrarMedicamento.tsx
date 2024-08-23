@@ -2,8 +2,9 @@ import { useState } from "react";
 import InputFieldProps from "@/components/InputFieldProps";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { createMedicamento } from "@/helpers/medicamento";
 
-export default function CadastrarMedicamento(){
+export default function CadastrarMedicamento() {
 
     const [form, setForm] = useState({
         nomeMedicamento: '',
@@ -12,39 +13,31 @@ export default function CadastrarMedicamento(){
         dosagem: '',
     });
 
+
     const router = useRouter();
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-    const handleChangeForm = (event) => {
-        setForm({
-          ...form,
-          [event.target.name]: event.target.value,
-        });
-      };
+    const handleChangeForm = (event: { target: { name: any; value: any; }; }) => {
+        const { name, value } = event.target;
 
-    const handleForm = async (event) => {
+        setForm({
+            ...form,
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    const handleForm = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         console.log(form)
 
         try {
-            const response = await fetch('http://localhost:8080/caps/medicamento', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(form),
-            });
-
-            const json = await response.json();
-            console.log(response.status);
+            const { ok, json } = await createMedicamento(form);
             console.log(json);
-
-            
-            if (response.ok) {
+            if (ok) {
                 setShowSuccessPopup(true);
                 setTimeout(() => {
                     router.push('TabelaMedicamentos');
-                }, 2000);    
+                }, 2000);
             } else {
                 alert(json.message || 'Erro ao criar medicamento!');
             }
@@ -88,14 +81,14 @@ export default function CadastrarMedicamento(){
     return (
 
         <div className="flex flex-col items-center justify-center min-h-[100vh]">
-                <h1 className="font-extrabold my-8 text-[#134e58] text-3xl uppercase text-center mx-4  mt-24">
-                    Preencha os campos para cadastrar um medicamento!
-                </h1>
+            <h1 className="font-extrabold my-8 text-[#134e58] text-3xl uppercase text-center mx-4  mt-24">
+                Preencha os campos para cadastrar um medicamento!
+            </h1>
             <div className="max-w-[500px] w-full bg-[#005562] p-6 text-white rounded-xl">
-                    <form onSubmit={handleForm} className="flex flex-col">
-                        {inputs.map((input) => (
-                            <label htmlFor="">
-                                    {input.placeholder}
+                <form onSubmit={handleForm} className="flex flex-col">
+                    {inputs.map((input) => (
+                        <label htmlFor="">
+                            {input.placeholder}
                             <InputFieldProps
                                 key={input.name}
                                 type={input.type}
@@ -105,28 +98,28 @@ export default function CadastrarMedicamento(){
                                 required={input.required}
                                 value={form[input.name]}
                                 onChange={handleChangeForm}
-                                />
-                                </label>
-                        ))}
+                            />
+                        </label>
+                    ))}
 
-                        <button className="bg-white p-2.5 mt-4 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
-                            Criar medicamento
-                        </button>
-                        <p className="mt-3 text-center text-lg">
+                    <button className="bg-white p-2.5 mt-4 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
+                        Criar medicamento
+                    </button>
+                    <p className="mt-3 text-center text-lg">
 
                         <span className="text-white border-b  cursor-pointer hover:text-gray-400 font-semibold">
                             <Link href={"TabelaMedicamentos"}>Voltar</Link>
                         </span>
                     </p>
 
-                    </form>
-                    {showSuccessPopup && (
-                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                            <div className="bg-white p-4 rounded shadow-md">
-                                <p className='text-black'>Cadastro do medicamento realizado com sucesso!</p>
-                            </div>
+                </form>
+                {showSuccessPopup && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-white p-4 rounded shadow-md">
+                            <p className='text-black'>Cadastro do medicamento realizado com sucesso!</p>
                         </div>
-                    )}
+                    </div>
+                )}
             </div>
         </div>
 
