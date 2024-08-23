@@ -2,6 +2,8 @@ import { useState } from "react";
 import InputFieldProps from "@/components/InputFieldProps";
 import { useRouter } from 'next/router';
 import Link from "next/link";
+import { createTerapeuta } from "@/helpers/terapeuta";
+
 
 export default function CadastrarTerapeuta() {
   const [form, setForm] = useState({
@@ -41,26 +43,17 @@ export default function CadastrarTerapeuta() {
     }
   };
 
-  const handleForm = async (event) => {
+  const handleForm = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     console.log(form);
 
     try {
-      const response = await fetch("http://localhost:8080/caps/terapeuta", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-
-      const json = await response.json();
-      console.log(response.status);
+    
+      const {ok, json} = await createTerapeuta(form);
       console.log(json);
 
-      if (response.ok) {
+      if (ok) {
         setShowSuccessPopup(true);
-
         setTimeout(() => {
           router.push('TabelaTerapeuta');
         }, 2000);
@@ -210,7 +203,7 @@ export default function CadastrarTerapeuta() {
         {showSuccessPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-4 rounded shadow-md">
-              <p>Cadastro de terapeuta realizado com sucesso!</p>
+              <p className="text-black">Cadastro de terapeuta realizado com sucesso!</p>
             </div>
           </div>
         )}

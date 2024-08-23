@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 import Navbar from '@/components/Navbar';
 import { Inter } from 'next/font/google';
 import Editar from '@/components/EditarTerapeuta';
@@ -7,11 +7,18 @@ import editar from '@/assets/editar.png';
 import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import { deleteTerapeuta, fetchTerapeutas } from '@/helpers/terapeuta';
 
-const inter = Inter({ subsets: ['latin'] });
+interface terapeutaProps{
+    id: number;
+    nome: string;
+    crefito: string;
+    diasDisponiveis: string[];
+    horariosDisponiveis: string[];
+}
 
 export default function TabelaTerapeuta() {
-    const [terapeutas, setTerapeutas] = useState([]);
+    const [terapeutas, setTerapeutas] = useState<terapeutaProps[]>([]);
     const [selectedTerapeuta, setSelectedTerapeuta] = useState(null);
     const [editTerapeuta, setEditTerapeuta] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -19,18 +26,7 @@ export default function TabelaTerapeuta() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/caps/terapeuta', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const data: {
-                    id: string;
-                    nome: string;
-                    crefito: string;
-                    diasDisponiveis: string[];
-                    horariosDisponiveis: string[];
-                }[] = await response.json();
+                const data = await fetchTerapeutas();
                 setTerapeutas(data);
             } catch (error) {
                 console.error('Erro ao buscar terapeutas:', error);
@@ -40,27 +36,21 @@ export default function TabelaTerapeuta() {
         fetchData();
     }, []);
 
-    const handleEdit = (terapeuta) => {
+    const handleEdit = (terapeuta: SetStateAction<null>) => {
         setSelectedTerapeuta(terapeuta);
         setEditTerapeuta(true);
     };
 
-    const handleDelete = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/caps/terapeuta/${id}`, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
+    const handleDelete = async (id: number) => {
+       const sucess = await deleteTerapeuta(id);
+            if (sucess) {
                 setTerapeutas(terapeutas.filter(terapeuta => terapeuta.id !== id));
             } else {
                 console.error('Erro ao excluir terrapeuta');
             }
-        } catch (error) {
-            console.error('Erro ao excluir terapeuta:', error);
-        }
     };
 
-    const handleChangeForm = (event) => {
+    const handleChangeForm = (event: {target: {name: any; value: any; };}) => {
         const { name, value } = event.target;
 
         if (name === 'searchQuery') {

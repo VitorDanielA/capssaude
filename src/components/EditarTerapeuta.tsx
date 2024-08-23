@@ -1,18 +1,15 @@
 import { useState, useEffect } from 'react';
 import InputFieldProps from "@/components/InputFieldProps";
+import { updateTerapeuta } from '@/helpers/terapeuta';
 
 const EditarTerapeuta = ({ terapeuta, onClose, onSave }) => {
     const [formData, setFormData] = useState({
         ...terapeuta,
-        diasDisponiveis: terapeuta.diasDisponiveis.join(', '),
-        horariosDisponiveis: terapeuta.horariosDisponiveis.join(', '),
     });
 
     useEffect(() => {
         setFormData({
             ...terapeuta,
-            diasDisponiveis: terapeuta.diasDisponiveis.join(', '),
-            horariosDisponiveis: terapeuta.horariosDisponiveis.join(', '),
         });
     }, [terapeuta]);
 
@@ -20,9 +17,10 @@ const EditarTerapeuta = ({ terapeuta, onClose, onSave }) => {
         const { name, value } = e.target;
 
         if (name === 'diasDisponiveis' || name === 'horariosDisponiveis') {
+            const newList = value.split(',').map(item => item.trim());
             setFormData(prev => ({
                 ...prev,
-                [name]: value,
+                [name]: newList,
             }));
         } else {
             setFormData(prev => ({
@@ -32,26 +30,16 @@ const EditarTerapeuta = ({ terapeuta, onClose, onSave }) => {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         const updatedData = {
             ...formData,
-            diasDisponiveis: formData.diasDisponiveis.split(',').map(item => item.trim()),
-            horariosDisponiveis: formData.horariosDisponiveis.split(',').map(item => item.trim()),
         };
 
         try {
-            const response = await fetch(`http://localhost:8080/caps/terapeuta/${updatedData.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedData),
-            });
-
-            if (response.ok) {
-                const updatedTerapeuta = await response.json();
-                onSave(updatedTerapeuta);
+            const { ok, json } = await updateTerapeuta(formData.id, formData)
+            if (ok) {
+                onSave(json);
             } else {
                 console.error('Erro ao atualizar terapeuta');
             }
