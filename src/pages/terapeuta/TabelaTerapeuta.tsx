@@ -69,7 +69,7 @@ export default function TabelaTerapeuta() {
         <main className="flex flex-col">
             <div className="mt-24">
                 <h1 className="sm:text-5xl text-3xl text-[#005562] font-bold text-center mb-8 mt-8">
-                    TABELA DE TERAPEUTAS
+                    TABELA DE TERAPEUTAS OCUPACIONAIS
                 </h1>
 
                 <div className='flex justify-start flex-wrap gap-5 my-5 mx-20'>

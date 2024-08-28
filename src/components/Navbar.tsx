@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Health from './../assets/saude.png';
+import Link from "next/link";
 
 const Navbar = () => {
 
@@ -13,7 +14,7 @@ const Navbar = () => {
 
   const navItems = [
     { id: 1, text: 'Home', anchor: '#home' },
-    { id: 2, text: 'Logar', anchor: '#logar' },
+    { id: 2, text: 'Logar', link: '/signIn'},
     { id: 3, text: 'Serviços', anchor: '#service' },
     { id: 4, text: 'Sobre', anchor: '#about' },
     { id: 5, text: 'Contato', anchor: '#contact' },
@@ -25,13 +26,19 @@ const Navbar = () => {
       <h1 className='w-full text-3xl font-bold text-[#005562] uppercase'>CAPS Saúde</h1>
       <ul className='hidden md:flex'>
         {navItems.map(item => (
-          <a
-            key={item.id}
-            className='p-4 hover:text-[#378995] rounded-xl m-2 text-xl hover:underline font-semibold cursor-pointer duration-300 text-[#225860]'
-            href={item.anchor}
-          >
-            {item.text}
-          </a>
+            item.link ? (
+                <Link href={item.link} key={item.id} className='p-4 hover:text-[#378995] rounded-xl m-2 text-xl hover:underline font-semibold cursor-pointer duration-300 text-[#225860]'>
+                    {item.text}
+                </Link>
+            ) : (
+                <a
+                    key={item.id}
+                    className='p-4 hover:text-[#378995] rounded-xl m-2 text-xl hover:underline font-semibold cursor-pointer duration-300 text-[#225860]'
+                    href={item.anchor}
+                >
+                    {item.text}
+                </a>
+            )
         ))}
       </ul>
 
