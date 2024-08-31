@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import InputFieldProps from "@/components/InputFieldProps";
 import { updatePsicologo } from '@/helpers/psicologo';
 
-const EditarPsicologo = ({ psicologo, onClose, onSave }) => {
+const EditarPsicologo = ({ psicologo, onClose, onSave }: any) => {
     const [formData, setFormData] = useState({
         ...psicologo,
     });
@@ -13,17 +13,17 @@ const EditarPsicologo = ({ psicologo, onClose, onSave }) => {
         });
     }, [psicologo]);
 
-    const handleChange = (e) => {
+    const handleChange = (e: { target: { name: any; value: any; }; })  => {
         const { name, value } = e.target;
 
         if (name === 'diasDisponiveis' || name === 'horariosDisponiveis') {
-            const newList = value.split(',').map(item => item.trim());
-            setFormData(prev => ({
+            const newList = value.split(',').map((item:any) => item.trim());
+            setFormData((prev:any) => ({
                 ...prev,
                 [name]: newList,
             }));
         } else {
-            setFormData(prev => ({
+            setFormData((prev:any) => ({
                 ...prev,
                 [name]: value,
             }));

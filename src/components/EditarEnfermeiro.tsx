@@ -3,7 +3,7 @@ import InputFieldProps from "@/components/InputFieldProps";
 import { updateEnfermeiro } from '@/helpers/enfermeiro';
 
 
-const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }) => {
+const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }: any) => {
     const [formData, setFormData] = useState({
         ...enfermeiro,
     });
@@ -14,17 +14,17 @@ const EditarEnfermeiro = ({ enfermeiro, onClose, onSave }) => {
         });
     }, [enfermeiro]);
 
-    const handleChange = (e) => {
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
 
         if (name === 'diasDisponiveis' || name === 'horariosDisponiveis') {
-            const newList = value.split(',').map(item => item.trim());
-            setFormData(prev => ({
+            const newList = value.split(',').map((item:any) => item.trim());
+            setFormData((prev:any) => ({
                 ...prev,
                 [name]: newList,
             }));
         } else {
-            setFormData(prev => ({
+            setFormData((prev: any) => ({
                 ...prev,
                 [name]: value,
             }));

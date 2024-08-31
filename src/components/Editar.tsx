@@ -7,15 +7,9 @@ interface User extends Record<string, string | number>{
     id: number;
   }
   
-  interface OnClose {
-    (): void;
-  }
-  
-  interface OnSave {
-    (updatedUser: User): void;
-  }
+ 
 
-const Editar = ({ usuario, onClose, onSave }: { usuario: User; onClose: OnClose; onSave: OnSave }) => {
+const Editar = ({ usuario, onClose, onSave }: any) => {
     const [formData, setFormData] = useState({ ...usuario });
 
     const handleChange = (e: { target: { name: any; value: any; }; }) => {

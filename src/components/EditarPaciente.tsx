@@ -2,20 +2,7 @@ import { useState } from 'react';
 import InputFieldProps from "@/components/InputFieldProps";
 import { updatePaciente } from '@/helpers/paciente';
 
-interface Paciente extends Record<string, Number | any>{
-    id: number;
-    //nome: string;
-}
-
-interface OnClose {
-    (): void;
-  }
-  
-interface OnSave {
-    (updatedPaciente: Paciente): void;
-  }
-
-const Editar = ({ paciente, onClose, onSave }: {paciente: Paciente; onClose: OnClose; onSave: OnSave}) => {
+const Editar = ({ paciente, onClose, onSave }: any) => {
     const [formData, setFormData] = useState({
          ...paciente,
          telefonesEmergencia: paciente.telefonesEmergencia || [],
