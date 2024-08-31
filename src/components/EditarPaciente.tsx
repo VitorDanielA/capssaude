@@ -2,19 +2,32 @@ import { useState } from 'react';
 import InputFieldProps from "@/components/InputFieldProps";
 import { updatePaciente } from '@/helpers/paciente';
 
-const Editar = ({ paciente, onClose, onSave }) => {
+interface Paciente extends Record<string, Number | any>{
+    id: number;
+    //nome: string;
+}
+
+interface OnClose {
+    (): void;
+  }
+  
+interface OnSave {
+    (updatedPaciente: Paciente): void;
+  }
+
+const Editar = ({ paciente, onClose, onSave }: {paciente: Paciente; onClose: OnClose; onSave: OnSave}) => {
     const [formData, setFormData] = useState({
          ...paciente,
          telefonesEmergencia: paciente.telefonesEmergencia || [],
         });
 
 
-        const handleChange = (e) => {
+        const handleChange = (e: { target: { name: any; value: any; }; }) => {
             const { name, value } = e.target;
             if (name.startsWith('telefonesEmergencia')) {
               
               const index = parseInt(name.replace('telefonesEmergencia', ''), 10) - 1;
-              setFormData((prev) => ({
+              setFormData((prev: any) => ({
                 ...prev,
                 telefonesEmergencia: [
                   ...prev.telefonesEmergencia.slice(0, index),
@@ -23,7 +36,7 @@ const Editar = ({ paciente, onClose, onSave }) => {
                 ],
               }));
             } else {
-              setFormData((prev) => ({ ...prev, [name]: value }));
+              setFormData((prev: any) => ({ ...prev, [name]: value }));
             }
           };
 

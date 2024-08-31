@@ -4,8 +4,12 @@ import { useRouter } from 'next/router';
 import Link from "next/link";
 import { createPaciente } from "@/helpers/paciente";
 
+interface PacienteForm extends Record<string, string | any> {
+
+}
+
 export default function CadastrarPaciente() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<PacienteForm>({
     nome: "",
     cpf: "",
     dataDeNascimento: "",
@@ -22,7 +26,7 @@ export default function CadastrarPaciente() {
   const router = useRouter();
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-  const handleChangeForm = (event) => {
+  const handleChangeForm = (event: {target: {name: any; value:any;}}) => {
     const { name, value } = event.target;
 
     if (name.startsWith("telefoneResponsavel")) {
