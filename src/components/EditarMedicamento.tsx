@@ -2,7 +2,19 @@ import { useState } from "react";
 import InputFieldProps from "./InputFieldProps";
 import { updateMedicamento } from "@/helpers/medicamento";
 
-const Editar = ({ medicamento, onClose, onSave }) => {
+interface Medicamento extends Record<string, string | number> {
+    id: number;
+}
+
+interface OnClose {
+    (): void;
+  }
+  
+  interface OnSave {
+    (updatedMedicamento: Medicamento): void;
+  }
+
+const Editar = ({ medicamento, onClose, onSave }: { medicamento: Medicamento; onClose: OnClose; onSave: OnSave }) => {
     const [formData, setFormData] = useState({ ...medicamento });
 
     const handleChange = (e: { target: { name: any; value: any; }; }) => {

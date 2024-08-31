@@ -3,7 +3,19 @@ import { useState } from 'react';
 import InputFieldProps from './InputFieldProps';
 import Link from 'next/link';
 
-const Editar = ({ usuario, onClose, onSave }) => {
+interface User extends Record<string, string | number>{
+    id: number;
+  }
+  
+  interface OnClose {
+    (): void;
+  }
+  
+  interface OnSave {
+    (updatedUser: User): void;
+  }
+
+const Editar = ({ usuario, onClose, onSave }: { usuario: User; onClose: OnClose; onSave: OnSave }) => {
     const [formData, setFormData] = useState({ ...usuario });
 
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
