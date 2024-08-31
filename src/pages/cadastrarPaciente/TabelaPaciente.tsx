@@ -17,6 +17,7 @@ interface pacienteProps{
     cep: string;
     bairro: string;
     logradouro: string;
+    cartaoSus: string;
     telefone: string;
     telefonesEmergencia: string[];
 }
@@ -69,7 +70,7 @@ export default function TabelaPaciente() {
         paciente.nome.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const trs = ["Nome", "CPF", "Data de nascimento", "CEP", "Bairro", "Logradouro", "Telefone", "Telefone Responsavel", "Editar", "Excluir"];
+    const trs = ["Nome", "CPF", "Data de nascimento", "CEP", "Bairro", "Logradouro", "SUS", "Telefone", "Telefone Responsavel", "Editar", "Excluir"];
 
     return (
         <main className="flex flex-col">
@@ -128,6 +129,9 @@ export default function TabelaPaciente() {
                                     </td>
                                     <td className="px-6 py-4">
                                         {paciente.logradouro}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {paciente.cartaoSus}
                                     </td>
                                     <td className="px-6 py-4">
                                         {paciente.telefone}

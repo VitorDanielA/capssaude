@@ -13,6 +13,7 @@ export default function CadastrarPaciente() {
     bairro: "",
     logradouro: "",
     complemento: "",
+    cartaoSus: "",
     telefone: "",
     telefonesEmergencia: [],
   });
@@ -111,6 +112,13 @@ export default function CadastrarPaciente() {
     },
     {
       type: "text",
+      name: "cartaoSus",
+      className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
+      placeholder: "Numero do SUS",
+      required: true,
+    },
+    {
+      type: "text",
       name: "telefone",
       className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
       placeholder: "Telefone",
@@ -138,9 +146,9 @@ export default function CadastrarPaciente() {
       <h1 className="font-extrabold my-8 text-[#134e58] text-3xl uppercase text-center mt-24">
         Preencha os campos para cadastrar um paciente!
       </h1>
-      <div className="max-w-[800px] w-full bg-[#005562] p-6 text-white rounded-xl mb-10 fix-form-paciente">
+      <div className="max-w-[1000px] w-full bg-[#005562] p-6 text-white rounded-xl mb-10 fix-form-paciente">
         <form onSubmit={handleForm} className="flex flex-col">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             {inputs.map((input) => (
 
               <label className="">{input.placeholder}

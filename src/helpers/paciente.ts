@@ -6,6 +6,7 @@ export interface Paciente {
     cep: string;
     bairro: string;
     logradouro: string;
+    cartaoSus: string;
     telefone: string;
     telefonesEmergencia: string[];
 }
