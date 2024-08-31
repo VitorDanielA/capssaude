@@ -23,7 +23,7 @@ interface pacienteProps{
 
 export default function TabelaPaciente() {
     const [pacientes, setPacientes] = useState<pacienteProps[]>([]);
-    const [selectedPaciente, setSelectedPaciente] = useState(null);
+    const [selectedPaciente, setSelectedPaciente] = useState<pacienteProps | null>(null);
     const [editPaciente, setEditPaciente] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -42,7 +42,7 @@ export default function TabelaPaciente() {
         fetchData();
     }, []);
 
-    const handleEdit = (paciente: SetStateAction<null>) => {
+    const handleEdit = (paciente: pacienteProps) => {
         setSelectedPaciente(paciente);
         setEditPaciente(true);
     };
@@ -165,7 +165,7 @@ export default function TabelaPaciente() {
                 <Editar
                     paciente={selectedPaciente}
                     onClose={() => setEditPaciente(false)}
-                    onSave={(updatedPaciente) => {
+                    onSave={(updatedPaciente: pacienteProps) => {
                         setPacientes(pacientes.map(paciente => (paciente.id === updatedPaciente.id ? updatedPaciente : paciente)));
                         setEditPaciente(false);
                     }}

@@ -19,7 +19,7 @@ interface medicamentoProps {
 
 export default function TabelaMedicamentos() {
     const [medicamentos, setMedicamentos] = useState<medicamentoProps[]>([]);
-    const [selectedMedicamento, setSelectedMedicamento] = useState(null);
+    const [selectedMedicamento, setSelectedMedicamento] = useState<medicamentoProps | null>(null);
     const [editMedicamento, setEditMedicamento] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -36,7 +36,7 @@ export default function TabelaMedicamentos() {
         loadMedicamentos();
     }, []);
 
-    const handleEdit = (medicamento: SetStateAction<null>) => {
+    const handleEdit = (medicamento: medicamentoProps) => {
         setSelectedMedicamento(medicamento);
         setEditMedicamento(true);
     };
@@ -153,7 +153,7 @@ export default function TabelaMedicamentos() {
                 <Editar
                     medicamento={selectedMedicamento}
                     onClose={() => setEditMedicamento(false)}
-                    onSave={(updatedMedicamento) => {
+                    onSave={(updatedMedicamento: medicamentoProps) => {
                         setMedicamentos(medicamentos.map(medicamento => (medicamento.id === updatedMedicamento.id ? updatedMedicamento : medicamento)));
                         setEditMedicamento(false);
                     }}

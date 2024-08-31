@@ -19,7 +19,7 @@ interface enfermeiroProps{
 
 export default function TabelaEnfermeiro() {
     const [enfermeiros, setEnfermeiros] = useState<enfermeiroProps[]>([]);
-    const [selectedEnfermeiro, setSelectedEnfermeiro] = useState(null);
+    const [selectedEnfermeiro, setSelectedEnfermeiro] = useState<enfermeiroProps | null>(null);
     const [editEnfermeiro, setEditEnfermeiro] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -36,7 +36,7 @@ export default function TabelaEnfermeiro() {
         fetchData();
     }, []);
 
-    const handleEdit = (enfermeiro: SetStateAction<null>) => {
+    const handleEdit = (enfermeiro: enfermeiroProps) => {
         setSelectedEnfermeiro(enfermeiro);
         setEditEnfermeiro(true);
     };
@@ -137,7 +137,7 @@ export default function TabelaEnfermeiro() {
                 <Editar
                     enfermeiro={selectedEnfermeiro}
                     onClose={() => setEditEnfermeiro(false)}
-                    onSave={(updatedEnfermeiro) => {
+                    onSave={(updatedEnfermeiro: enfermeiroProps) => {
                         setEnfermeiros(enfermeiros.map(enfermeiro => (enfermeiro.id === updatedEnfermeiro.id ? updatedEnfermeiro : enfermeiro)));
                         setEditEnfermeiro(false);
                     }}

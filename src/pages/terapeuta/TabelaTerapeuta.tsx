@@ -19,7 +19,7 @@ interface terapeutaProps{
 
 export default function TabelaTerapeuta() {
     const [terapeutas, setTerapeutas] = useState<terapeutaProps[]>([]);
-    const [selectedTerapeuta, setSelectedTerapeuta] = useState(null);
+    const [selectedTerapeuta, setSelectedTerapeuta] = useState<terapeutaProps | null>(null);
     const [editTerapeuta, setEditTerapeuta] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -36,7 +36,7 @@ export default function TabelaTerapeuta() {
         fetchData();
     }, []);
 
-    const handleEdit = (terapeuta: SetStateAction<null>) => {
+    const handleEdit = (terapeuta: terapeutaProps) => {
         setSelectedTerapeuta(terapeuta);
         setEditTerapeuta(true);
     };
@@ -137,7 +137,7 @@ export default function TabelaTerapeuta() {
                 <Editar
                     terapeuta={selectedTerapeuta}
                     onClose={() => setEditTerapeuta(false)}
-                    onSave={(updatedTerapeuta) => {
+                    onSave={(updatedTerapeuta: terapeutaProps) => {
                         setTerapeutas(terapeutas.map(terapeuta => (terapeuta.id === updatedTerapeuta.id ? updatedTerapeuta : terapeuta)));
                         setEditTerapeuta(false);
                     }}

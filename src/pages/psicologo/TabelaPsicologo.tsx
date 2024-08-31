@@ -19,7 +19,7 @@ interface psicologoProps {
 
 export default function TabelaPsicologo() {
     const [psicologos, setPsicologos] = useState<psicologoProps[]>([]);
-    const [selectedPsicologo, setSelectedPsicologo] = useState(null);
+    const [selectedPsicologo, setSelectedPsicologo] = useState<psicologoProps | null>(null);
     const [editPsicologo, setEditPsicologo] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -36,18 +36,18 @@ export default function TabelaPsicologo() {
         fetchData();
     }, []);
 
-    const handleEdit = (psicologo: SetStateAction<null>) => {
+    const handleEdit = (psicologo: psicologoProps) => {
         setSelectedPsicologo(psicologo);
         setEditPsicologo(true);
     };
 
     const handleDelete = async (id: number) => {
-            const sucess = await deletePsicologo(id);
-            if (sucess) {
-                setPsicologos(psicologos.filter(psicologo => psicologo.id !== id));
-            } else {
-                console.error('Erro ao excluir psicólogo');
-            }
+        const sucess = await deletePsicologo(id);
+        if (sucess) {
+            setPsicologos(psicologos.filter(psicologo => psicologo.id !== id));
+        } else {
+            console.error('Erro ao excluir psicólogo');
+        }
     };
 
     const handleChangeForm = (event: {target: {name: any; value: any; };}) => {
@@ -137,7 +137,7 @@ export default function TabelaPsicologo() {
                 <Editar
                     psicologo={selectedPsicologo}
                     onClose={() => setEditPsicologo(false)}
-                    onSave={(updatedPsicologo) => {
+                    onSave={(updatedPsicologo: psicologoProps) => {
                         setPsicologos(psicologos.map(psicologo => (psicologo.id === updatedPsicologo.id ? updatedPsicologo : psicologo)));
                         setEditPsicologo(false);
                     }}

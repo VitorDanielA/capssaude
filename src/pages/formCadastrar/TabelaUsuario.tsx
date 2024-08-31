@@ -7,16 +7,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { deleteUser, fetchUsers } from '@/helpers/usuario';
 
-interface usuariosProps{
-    id: number,
-    nome: string,
-    email: string,
-    nivelAcesso: number,
+interface usuariosProps {
+    id: number;
+    nome: string;
+    email: string;
+    nivelAcesso: number;
 }
 
 export default function TabelaUsuario() {
     const [usuarios, setUsuarios] = useState<usuariosProps[]>([]);
-    const [selectedUser, setSelectedUser] = useState(null);
+    const [selectedUser, setSelectedUser] = useState<usuariosProps | null>(null);
     const [editUser, setEditUser] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -33,7 +33,7 @@ export default function TabelaUsuario() {
         loadUsers();
     }, []);
 
-    const handleEdit = (usuario: SetStateAction<null>) => {
+    const handleEdit = (usuario: usuariosProps) => {
         setSelectedUser(usuario);
         setEditUser(true);
     };
@@ -45,7 +45,7 @@ export default function TabelaUsuario() {
         } else {
             console.error('Erro ao excluir usuário');
         }
-    };    
+    };
 
     const handleChangeForm = (event: { target: { name: any; value: any; }; }) => {
         const { name, value } = event.target;
@@ -144,7 +144,7 @@ export default function TabelaUsuario() {
                 <Editar
                     usuario={selectedUser}
                     onClose={() => setEditUser(false)}
-                    onSave={(updatedUser) => {
+                    onSave={(updatedUser: usuariosProps) => {
                         setUsuarios(usuarios.map(usuario => (usuario.id === updatedUser.id ? updatedUser : usuario)));
                         setEditUser(false);
                     }}
