@@ -4,8 +4,10 @@ import { useRouter } from 'next/router';
 import Link from "next/link";
 import { createPsicologo } from "@/helpers/psicologo";
 
+interface PsciologoForm extends Record<string, number | any> {}
+
 export default function CadastrarPsicologo() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<PsciologoForm>({
     nome: "",
     cpf: "",
     dataDeNascimento: "",
@@ -25,11 +27,11 @@ export default function CadastrarPsicologo() {
   const router = useRouter();
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-  const handleChangeForm = (event) => {
+  const handleChangeForm = (event: {target: {name: any; value:any;}}) => {
     const { name, value } = event.target;
 
     if (name === "diasDisponiveis" || name === "horariosDisponiveis") {
-      const newList = value.split(',').map(item => item.trim());
+      const newList = value.split(',').map((item: any) => item.trim());
       setForm(prevForm => ({
         ...prevForm,
         [name]: newList,
