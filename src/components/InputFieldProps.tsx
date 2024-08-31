@@ -6,7 +6,7 @@ interface InputFieldProps {
   className: string;
   placeholder: string;
   required?: boolean;
-  value: string;
+  value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

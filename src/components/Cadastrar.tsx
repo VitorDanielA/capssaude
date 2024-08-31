@@ -4,9 +4,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { createUser } from '@/helpers/usuario';
 
+interface UserForm extends Record<string, string | number>{
+
+  }
 
 export default function Cadastrar() {
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<UserForm>({
         nome: '',
         email: '',
         senha: '',

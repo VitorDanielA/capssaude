@@ -4,9 +4,13 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { createMedicamento } from "@/helpers/medicamento";
 
+interface MediForm extends Record<string, string> {
+
+}
+
 export default function CadastrarMedicamento() {
 
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<MediForm>({
         nomeMedicamento: '',
         descricao: '',
         horario: '',
