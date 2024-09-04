@@ -11,6 +11,7 @@ import { RiServiceFill } from "react-icons/ri";
 import { IoIosHeartHalf } from "react-icons/io";
 import { GiBrain } from "react-icons/gi"
 import { IoHomeOutline } from "react-icons/io5";
+import { FaUserDoctor } from "react-icons/fa6";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -21,7 +22,8 @@ const Sidebar = () => {
         { name: "Home", link: "/", icon: IoHomeOutline },
         { name: "Sobre", link: "/#about", icon: BsInfoCircle },
         { name: "Contato", link: "/#contact", icon: MdContacts },
-        { name: "Psiquiatra", link: "/", icon: FaBrain, margin: true },
+        { name: "Médicos", link: "/medico/TabelaMedico", icon: FaUserDoctor, margin: true },
+        { name: "Psiquiatra", link: "/", icon: FaBrain },
         { name: "Psicólogo", link: "/psicologo/TabelaPsicologo", icon: HiChatBubbleLeftEllipsis },
         { name: "Assistente social", link: "/", icon: RiServiceFill },
         { name: "Sáude", link: "/", icon: IoIosHeartHalf },

@@ -8,6 +8,7 @@ export default function Document() {
       <Head />
       <body className="">
         <Navbar />
+        <Sidebar />
         <Main />
         <NextScript />
       </body>
