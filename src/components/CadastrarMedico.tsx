@@ -1,0 +1,230 @@
+import React from 'react';
+import { useState } from 'react';
+import InputFieldProps from "@/components/InputFieldProps";
+import { useRouter } from 'next/router';
+import { createMedicos } from '@/helpers/medico';
+import Link from 'next/link';
+
+interface MedicoForm extends Record<string, number | any> {}
+
+export default function CadastrarMedico() {
+    const [form, setForm] = useState<MedicoForm>({
+        nome: "",
+        email: "",
+        cpf: "",
+        dataDeNascimento: "",
+        cep: "",
+        bairro: "",
+        logradouro: "",
+        complemento: "",
+        telefone: "",
+        sexo: "",
+        especialidade: "",
+        codEspecialidade: "",
+        diasAtendimento: [],
+        horasAtendimento: [],
+        comentarios: "",
+        codigoRegistro: "",
+    });
+
+    const router = useRouter();
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+    const handleChangeForm = (event: {target: {name: any; value:any;}}) => {
+        const { name, value } = event.target;
+
+        if (name === "diasAtendimento" || name === "horasAtendimento") {
+            const newList = value.split(',').map((item: any) => item.trim());
+            setForm(prevForm => ({
+                ...prevForm,
+                [name]: newList,
+            }));
+        } else {
+            setForm(prevForm => ({
+                ...prevForm,
+                [name]: value,
+            }));
+        }
+    };
+
+    const handleForm = async (event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+        console.log(form);
+        try {
+            const { ok, json } = await createMedicos(form);
+            console.log(json);
+            if (ok) {
+                setShowSuccessPopup(true);
+                setTimeout(() => {
+                    router.push('TabelaMedico');
+                }, 2000);
+            } else {
+                alert(json.message || 'Erro ao criar médico');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Erro ao criar médico');
+        }
+    };
+
+    const inputs = [
+        {
+            type: 'text',
+            name: 'nome',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mt-2 mb-5',
+            placeholder: 'Nome',
+            required: true,
+        },
+        {
+            type: 'email',
+            name: 'email',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Email',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'cpf',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'CPF',
+            required: true,
+        },
+        {
+            type: 'date',
+            name: 'dataDeNascimento',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Data de Nascimento',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'cep',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'CEP',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'bairro',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Bairro',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'logradouro',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Logradouro',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'complemento',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Complemento',
+            required: false,
+        },
+        {
+            type: 'tel',
+            name: 'telefone',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Telefone',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'sexo',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Sexo',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'especialidade',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Especialidade',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'codEspecialidade',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Código da Especialidade',
+            required: true,
+        },
+        {
+            type: "text",
+            id: "diasAtendimento",
+            name: "diasAtendimento",
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Dias de Atendimento',
+            required: true,
+        },
+        {
+            type: "text",
+            id: "horasAtendimento",
+            name: "horasAtendimento",
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Horas de Atendimento',
+            required: true,
+        },
+        {
+            type: 'text',
+            name: 'comentarios',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Comentários',
+            required: false,
+        },
+        {
+            type: 'text',
+            name: 'codigoRegistro',
+            className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
+            placeholder: 'Código de Registro',
+            required: true,
+        },
+    ];
+
+    return (
+        <div className="flex flex-col items-center justify-center min-h-[100vh]">
+            <h1 className="font-extrabold my-8 text-[#134e58] text-3xl uppercase text-center mt-24">
+                Preencha os campos para cadastrar o médico!
+            </h1>
+            <div className="max-w-[800px] w-full bg-[#005562] p-6 text-white rounded-xl mb-10 fix-form-medico">
+                <form onSubmit={handleForm} className="flex flex-col">
+                    <div className="grid grid-cols-3 gap-4">
+                        {inputs.map((input) => (
+                            <label key={input.name} className="">
+                                {input.placeholder}
+                                <InputFieldProps
+                                    type={input.type}
+                                    name={input.name}
+                                    className={input.className}
+                                    placeholder={input.placeholder}
+                                    required={input.required}
+                                    value={form[input.name]}
+                                    onChange={handleChangeForm}
+                                />
+                            </label>
+                        ))}
+                    </div>
+                    <button className="bg-white p-2.5 mt-2 rounded-lg text-[#005562] hover:bg-[#e5f1f3] text-xl font-semibold">
+                        Cadastrar Médico
+                    </button>
+                    <p className="mt-3 text-center text-lg">
+                    <span className="text-white border-b cursor-pointer hover:text-gray-400 font-semibold">
+                        <Link href={"TabelaMedico"}>Voltar</Link>
+                    </span>
+                    </p>
+                </form>
+                {showSuccessPopup && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-white p-4 rounded shadow-md">
+                            <p className='text-black'>Cadastro realizado com sucesso!</p>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+
+}
