@@ -13,11 +13,9 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { id: 1, text: 'Home', anchor: '#home' },
-    { id: 2, text: 'Logar', link: '/signIn'},
-    { id: 3, text: 'Serviços', anchor: '#service' },
-    { id: 4, text: 'Sobre', anchor: '#about' },
-    { id: 5, text: 'Contato', anchor: '#contact' },
+    { id: 1, text: 'Home', anchor: '/' },
+    { id: 2, text: 'Serviços', anchor: '/servicos/TelaServicos' },
+    { id: 3, text: 'Contato', anchor: '/contato/TelaContato' },
   ];
 
   return (

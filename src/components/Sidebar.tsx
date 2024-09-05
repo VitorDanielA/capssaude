@@ -12,6 +12,8 @@ import { IoIosHeartHalf } from "react-icons/io";
 import { GiBrain } from "react-icons/gi"
 import { IoHomeOutline } from "react-icons/io5";
 import { FaUserDoctor } from "react-icons/fa6";
+import { FaUserNurse } from "react-icons/fa";
+import { RiPsychotherapyFill } from "react-icons/ri";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -20,13 +22,11 @@ const Sidebar = () => {
 
     const menus = [
         { name: "Home", link: "/", icon: IoHomeOutline },
-        { name: "Sobre", link: "/#about", icon: BsInfoCircle },
-        { name: "Contato", link: "/#contact", icon: MdContacts },
+        { name: "Serviços", link: "/servicos/TelaServicos", icon: GrServices },
+        { name: "Contato", link: "/contato/TelaContato", icon: MdContacts },
         { name: "Médicos", link: "/medico/TabelaMedico", icon: FaUserDoctor, margin: true },
-        { name: "Psiquiatra", link: "/", icon: FaBrain },
-        { name: "Psicólogo", link: "/psicologo/TabelaPsicologo", icon: HiChatBubbleLeftEllipsis },
-        { name: "Assistente social", link: "/", icon: RiServiceFill },
-        { name: "Sáude", link: "/", icon: IoIosHeartHalf },
+        { name: "Enfermeiro", link: "/enfermeiro/TabelaEnfermeiro", icon:  FaUserNurse },
+        { name: "Psicólogo", link: "/psicologo/TabelaPsicologo", icon: RiPsychotherapyFill },
         { name: "Terapeuta", link: "/terapeuta/TabelaTerapeuta", icon:  GiBrain },
     ];
       
