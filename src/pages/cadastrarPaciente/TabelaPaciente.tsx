@@ -164,15 +164,15 @@ export default function TabelaPaciente() {
                 </div>
 
             </div>
-
+           
             {editPaciente && (
                 <Editar
-                    paciente={selectedPaciente}
-                    onClose={() => setEditPaciente(false)}
-                    onSave={(updatedPaciente: pacienteProps) => {
-                        setPacientes(pacientes.map(paciente => (paciente.id === updatedPaciente.id ? updatedPaciente : paciente)));
-                        setEditPaciente(false);
-                    }}
+                paciente={selectedPaciente}
+                onClose={() => setEditPaciente(false)}
+                onSave={(updatedPaciente: pacienteProps) => {
+                    setPacientes(pacientes.map(paciente => (paciente.id === updatedPaciente.id ? updatedPaciente : paciente)));
+                    setEditPaciente(false);
+                }}
                 />
             )}
 

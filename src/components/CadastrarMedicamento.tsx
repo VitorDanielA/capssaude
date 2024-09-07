@@ -49,7 +49,7 @@ export default function CadastrarMedicamento() {
     };
 
     const handleContinue = () => {
-        router.push('TabelaMedicamento');
+        router.push('TabelaMedicamentos');
         setShowSuccessPopup(false);
       };
 
