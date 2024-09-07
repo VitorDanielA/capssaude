@@ -54,9 +54,6 @@ export default function CadastrarEnfermeiro() {
 
       if (ok) {
         setShowSuccessPopup(true);
-        setTimeout(() => {
-          router.push('TabelaEnfermeiro');
-        }, 2000);
       } else {
         alert(json.message || "Erro ao criar Enfermeiro");
       }
@@ -64,6 +61,11 @@ export default function CadastrarEnfermeiro() {
       console.error(error);
       alert("Erro ao criar Enfermeiro");
     }
+  };
+
+  const handleContinue = () => {
+    router.push('TabelaEnfermeiro');
+    setShowSuccessPopup(false);
   };
 
   const inputs = [
@@ -201,9 +203,12 @@ export default function CadastrarEnfermeiro() {
           </p>
         </form>
         {showSuccessPopup && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"> 
             <div className="bg-white p-4 rounded shadow-md">
-              <p className="text-black">Cadastro de enfermeiro realizado com sucesso!</p>
+              <h1 className='text-black'>Cadastro realizado com sucesso!</h1>
+              <button onClick={handleContinue} className="bg-[#005562] p-2 mt-2 rounded-lg text-white hover:bg-[#4599a8] text-xl font-semibold">
+                Continuar
+              </button>
             </div>
           </div>
         )}
