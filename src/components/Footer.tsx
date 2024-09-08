@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Saude from './../assets/saude.png';
+import Link from 'next/link';
 
 export default function Footer(){
     return(
@@ -12,19 +13,13 @@ export default function Footer(){
                     </p>
                     <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0 dark:text-gray-400">
                         <li>
-                            <a href="#home" className="hover:underline me-4 md:me-6">Home</a>
+                            <a href="http://localhost:3000" className="hover:underline me-4 md:me-6">Home</a>
                         </li>
                         <li>
-                            <a href="#login" className="hover:underline me-4 md:me-6">Login</a>
+                            <a href="http://localhost:3000/servicos/TelaServicos" className="hover:underline me-4 md:me-6">Service</a>
                         </li>
                         <li>
-                            <a href="#service" className="hover:underline me-4 md:me-6">Service</a>
-                        </li>
-                        <li>
-                            <a href="#about" className="hover:underline me-4 md:me-6">Sobre</a>
-                        </li>
-                        <li>
-                            <a href="#contact" className="hover:underline">Contato</a>
+                            <a href="http://localhost:3000/contato/TelaContato" className="hover:underline">Contato</a>
                         </li>
                     </ul>
                 </div>
