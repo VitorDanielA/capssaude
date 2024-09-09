@@ -1,13 +1,13 @@
 export interface Consulta {
     id: number;
-    nome: string;
-    dataConsulta: Date,
-    horarioConsulta: string,
+    acompanhanteLegal: string;
+    data: Date,
+    horario: string,
     sintomas: string,
-    duracaoSintomas: string,
-    medicamentos: string[],
-    orientacoes: string,
-    responsavel: string,
+    duracao: string,
+    medicamento: string[],
+    orientacao: string,
+   
 }
 
 export const fetchConsultas = async (): Promise<Consulta[]> => {

@@ -11,16 +11,13 @@ import { deleteConsulta, fetchConsultas } from '@/helpers/consulta';
 
 interface consultaProps{
     id: number;
-    nome: string;
-    dataConsulta: Date;
+    acompanhanteLegal: string;
+    data: Date;
+    horario: string;
     sintomas: string;
-    medicamentos: string[];
-    responsavel: string;
-    horarioConsulta: string;
-    duracaoSintomas: string;
-    orientacoes: string;
-    
-    
+    medicamento: string[];
+    duracao: string;
+    orientacao: string;
 }
 
 export default function TabelaConsulta() {
@@ -66,10 +63,10 @@ export default function TabelaConsulta() {
     };
 
     const filteredConsultas = consultas.filter((consulta) =>
-        consulta.nome.toLowerCase().includes(searchQuery.toLowerCase())
+        consulta.acompanhanteLegal.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const trs = ["Nome", "Data da Consuta", "Horário da Consulta", "Sintomas", "Duração dos Sintomas", "Medicamentos", "Orientações", "Responsavel", "Editar", "Excluir"];
+    const trs = ["Acompanhante legal", "Data da Consuta", "Horário da Consulta", "Sintomas", "Duração dos Sintomas", "Medicamentos", "Orientações", "Editar", "Excluir"];
 
     return (
         <main className="flex flex-col">
@@ -90,7 +87,7 @@ export default function TabelaConsulta() {
                         />
                     </div>
                     <button className="bg-[#005562] rounded-lg text-white h-12 text-sm transition-all hover:bg-[#1f616b] px-5 adjust-buttons">
-                        <Link href="/eonsulta/FormCadastrarEonsulta">
+                        <Link href="/consulta/FormCadastrarConsulta">
                             Adicionar Consulta
                         </Link>
                     </button>
@@ -111,28 +108,25 @@ export default function TabelaConsulta() {
                             {filteredConsultas.map((consulta, index) => (
                                 <tr key={index} className="text-center font-medium text-[#144d54]">
                                     <th scope="row" className="px-6 py-4 whitespace-nowrap">
-                                        {consulta.nome}
+                                        {consulta.acompanhanteLegal}
                                     </th>
                                     <td className="px-6 py-4">
-                                        {consulta.dataConsulta.substring(0, 10)}
+                                        {consulta.data.substring(0, 10)}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {consulta.horarioConsulta}
+                                        {consulta.horario}
                                     </td>
                                     <td className="px-6 py-4">
                                         {consulta.sintomas}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {consulta.duracaoSintomas}
+                                        {consulta.duracao}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {consulta.medicamentos?.length > 0 ? consulta.medicamentos.join(', ') : 'N/A'}
+                                        {consulta.medicamento?.length > 0 ? consulta.medicamento.join(', ') : 'N/A'}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {consulta.orientacoes}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        {consulta.responsavel}
+                                        {consulta.orientacao}
                                     </td>
                                     <td className="px-6 py-4">
                                         <button onClick={() => handleEdit(consulta)} className="text-blue-400 hover:text-blue-600">

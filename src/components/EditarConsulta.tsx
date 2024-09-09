@@ -17,7 +17,7 @@ const EditarConsulta = ({ consulta, onClose, onSave }: any) => {
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
 
-        if (name === 'medicamentos') {
+        if (name === 'medicamento') {
             const newList = value.split(',').map((item:any) => item.trim());
             setFormData((prev:any) => ({
                 ...prev,
@@ -33,9 +33,6 @@ const EditarConsulta = ({ consulta, onClose, onSave }: any) => {
 
     const handleSubmit = async (e: {preventDefault: () => void;}) => {
         e.preventDefault();
-        const updatedData = {
-            ...formData,
-        };
 
         try {
             const { ok, json } = await updateConsulta(formData.id, formData);
@@ -54,21 +51,21 @@ const EditarConsulta = ({ consulta, onClose, onSave }: any) => {
     const inputs = [
         {
             type: "text",
-            name: "nome",
+            name: "acompanhanteLegal",
             className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "Nome",
             required: true,
         },
         {
             type: "date",
-            name: "dataConsulta",
+            name: "data",
             className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "Data da consulta",
             required: true,
         },
         {
             type: "text",
-            name: "horarioConsulta",
+            name: "horario",
             className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "Horario da Consulta",
             required: true,
@@ -82,30 +79,23 @@ const EditarConsulta = ({ consulta, onClose, onSave }: any) => {
         },
         {
             type: "text",
-            name: "duracaoSintomas",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
-            placeholder: "Duracao dos Sintomas",
-            required: true,
-        },
-        {
-            type: "text",
-            name: "medicamentos",
+            name: "medicamento",
             className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
             placeholder: "Medicamentos",
             required: true,
         },
         {
             type: "text",
-            name: "orientacoes",
+            name: "duracao",
             className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
-            placeholder: "Orientações",
+            placeholder: "Duracao dos Sintomas",
             required: true,
         },
         {
             type: "text",
-            name: "responsavel",
-            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-1",
-            placeholder: "Responsavel",
+            name: "orientacao",
+            className: "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus: outline-none mt-2 mb-10",
+            placeholder: "Orientações",
             required: true,
         },
     ];
@@ -113,9 +103,9 @@ const EditarConsulta = ({ consulta, onClose, onSave }: any) => {
     return (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
             <div className="max-w-[1000px] w-full bg-[#005562] p-6 text-white rounded-xl mb-10 fix-form-psicologo">
-                <h1 className="font-extrabold my-5 text-white text-3xl uppercase text-center mt-2">Editar Enfermeiro</h1>
+                <h1 className="font-extrabold my-5 text-white text-3xl uppercase text-center mt-2">Editar Consulta</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className='grid grid-cols-3 gap-4'>
+                    <div className='grid grid-cols-2 gap-4'>
                         {inputs.map((input) => (
                             <label key={input.name}>
                                 {input.placeholder}
