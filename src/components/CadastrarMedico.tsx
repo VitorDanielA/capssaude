@@ -39,7 +39,15 @@ export default function CadastrarMedico() {
                 ...prevForm,
                 [name]: newList,
             }));
-        } else {
+        } else if (name === "especialidade") {
+            const selectedEspecialidade = especialidades.find(e => e.value === value);
+            setForm(prevForm => ({
+                ...prevForm,
+                especialidade: value,
+                codEspecialidade: selectedEspecialidade ? selectedEspecialidade.sigla: '',
+            }));
+        }
+        else {
             setForm(prevForm => ({
                 ...prevForm,
                 [name]: value,
@@ -67,7 +75,21 @@ export default function CadastrarMedico() {
     const handleContinue = () => {
         router.push('TabelaMedico');
         setShowSuccessPopup(false);
-      };
+    };
+
+    const especialidades = [
+        { value: '', label: ''},
+        { value: 'MEDICO', label: 'Medico', sigla: 'CRM'},
+        { value: 'ENFERMEIRO', label: 'Enfermeiro', sigla: 'COREN'},
+        { value: 'PSICOLOGO', label: 'Psicologo', sigla: 'CRP'},
+        { value: 'TERAPEUTA', label: 'Terapeuta', sigla: 'CREFITO'},
+    ]
+
+    const sexos = [
+        { value: '', label: ''},
+        { value: 'Masculino', label:'Masculino'},
+        { value: 'Feminino', label:'Feminino'},
+    ]
 
     const inputs = [
         {
@@ -134,18 +156,20 @@ export default function CadastrarMedico() {
             required: true,
         },
         {
-            type: 'text',
+            type: 'select',
             name: 'sexo',
             className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
             placeholder: 'Sexo',
             required: true,
+            options: sexos,
         },
         {
-            type: 'text',
+            type: 'select',
             name: 'especialidade',
             className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
             placeholder: 'Especialidade',
             required: true,
+            options: especialidades,
         },
         {
             type: 'text',
@@ -197,15 +221,31 @@ export default function CadastrarMedico() {
                         {inputs.map((input) => (
                             <label key={input.name} className="">
                                 {input.placeholder}
-                                <InputFieldProps
-                                    type={input.type}
-                                    name={input.name}
-                                    className={input.className}
-                                    placeholder={input.placeholder}
-                                    required={input.required}
-                                    value={form[input.name]}
-                                    onChange={handleChangeForm}
-                                />
+                                {input.type === 'select' ? (
+                                    <select
+                                        name={input.name}
+                                        className={input.className}
+                                        required={input.required}
+                                        value={form[input.name]}
+                                        onChange={handleChangeForm}
+                                    >
+                                        {input.options.map(option => (
+                                            <option key={option.value} value={option.value}>
+                                                {option.label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                ) : (
+                                    <InputFieldProps
+                                        type={input.type}
+                                        name={input.name}
+                                        className={input.className}
+                                        placeholder={input.placeholder}
+                                        required={input.required}
+                                        value={form[input.name]}
+                                        onChange={handleChangeForm}
+                                    />
+                                )}
                             </label>
                         ))}
                     </div>
@@ -219,15 +259,15 @@ export default function CadastrarMedico() {
                     </p>
                 </form>
                 {showSuccessPopup && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"> 
-            <div className="bg-white p-4 rounded shadow-md">
-              <h1 className='text-black'>Cadastro realizado com sucesso!</h1>
-              <button onClick={handleContinue} className="bg-[#005562] p-2 mt-2 rounded-lg text-white hover:bg-[#4599a8] text-xl font-semibold">
-                Continuar
-              </button>
-            </div>
-          </div>
-        )}
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-white p-4 rounded shadow-md">
+                            <h1 className='text-black'>Cadastro realizado com sucesso!</h1>
+                            <button onClick={handleContinue} className="bg-[#005562] p-2 mt-2 rounded-lg text-white hover:bg-[#4599a8] text-xl font-semibold">
+                                Continuar
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

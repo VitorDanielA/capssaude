@@ -25,6 +25,18 @@ interface MedicoProps {
 const EditarMedico = ({ medico, onClose, onSave }: any) => {
     const [formData, setFormData] = useState({ ...medico });
 
+    const especialidades = [
+        { value: 'MEDICO', label: 'Médico', sigla: 'CRM' },
+        { value: 'ENFERMEIRO', label: 'Enfermeiro', sigla: 'COREN' },
+        { value: 'PSICOLOGO', label: 'Psicólogo', sigla: 'CRP' },
+        { value: 'TERAPEUTA', label: 'Terapeuta', sigla: 'CREFITO' },
+    ];
+
+    const sexos = [
+        { value: 'M', label: 'Masculino' },
+        { value: 'F', label: 'Feminino' },
+    ];
+
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
 
@@ -34,7 +46,17 @@ const EditarMedico = ({ medico, onClose, onSave }: any) => {
                 ...prev,
                 [name]: newList,
             }));
-        } else {
+        }
+        if (name === 'especialidade') {
+            const selectedEspecialidade = especialidades.find(especialidade => especialidade.value === value);
+            const sigla = selectedEspecialidade ? selectedEspecialidade.sigla : '';
+            setFormData((prev:any) => ({
+                ...prev,
+                especialidade: value,
+                codEspecialidade: sigla,
+            }));
+        }
+        else {
             setFormData((prev:any) => ({
                 ...prev,
                 [name]: value,
@@ -126,18 +148,20 @@ const EditarMedico = ({ medico, onClose, onSave }: any) => {
             required: true,
         },
         {
-            type: 'text',
+            type: 'select',
             name: 'sexo',
             className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5',
             placeholder: 'Sexo',
             required: true,
+            options: sexos,
         },
         {
-            type: 'text',
+            type: 'select',
             name: 'especialidade',
             className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5',
             placeholder: 'Especialidade',
             required: true,
+            options: especialidades,
         },
         {
             type: 'text',
@@ -186,15 +210,32 @@ const EditarMedico = ({ medico, onClose, onSave }: any) => {
                         {inputs.map((input) => (
                             <label htmlFor={input.name} key={input.name} className="flex flex-col">
                                 {input.placeholder}
-                                <InputFieldProps
-                                    type={input.type}
-                                    name={input.name}
-                                    className={input.className}
-                                    placeholder={input.placeholder}
-                                    required={input.required}
-                                    value={formData[input.name]}
-                                    onChange={handleChange}
-                                />
+                                {input.type === 'select' ? (
+                                    <select
+                                        name={input.name}
+                                        className={input.className}
+                                        value={formData[input.name]}
+                                        onChange={handleChange}
+                                        required={input.required}
+                                    >
+                                        <option value="">{input.placeholder}</option>
+                                        {input.options?.map((option: any) => (
+                                            <option key={option.value} value={option.value}>
+                                                {option.label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                ) : (
+                                    <InputFieldProps
+                                        type={input.type}
+                                        name={input.name}
+                                        className={input.className}
+                                        placeholder={input.placeholder}
+                                        required={input.required}
+                                        value={formData[input.name]}
+                                        onChange={handleChange}
+                                    />
+                                )}
                             </label>
                         ))}
                     </div>
