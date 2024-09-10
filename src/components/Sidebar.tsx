@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 
-import { HiMenuAlt3 } from "react-icons/hi";
-import { MdOutlineDashboard } from "react-icons/md";
 import { GrServices } from "react-icons/gr";
-import { BsInfoCircle } from "react-icons/bs";
-import { FaBrain } from "react-icons/fa";
 import { MdContacts } from "react-icons/md";
-import { HiChatBubbleLeftEllipsis } from "react-icons/hi2";
-import { RiServiceFill } from "react-icons/ri";
-import { IoIosHeartHalf } from "react-icons/io";
-import { GiBrain } from "react-icons/gi"
 import { IoHomeOutline } from "react-icons/io5";
 import { FaUserDoctor } from "react-icons/fa6";
-import { FaUserNurse } from "react-icons/fa";
-import { RiPsychotherapyFill } from "react-icons/ri";
+import { PiPillFill } from "react-icons/pi";
+import { ImProfile } from "react-icons/im";
+import { BsCalendar2PlusFill } from "react-icons/bs";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -25,9 +18,9 @@ const Sidebar = () => {
         { name: "Serviços", link: "/servicos/TelaServicos", icon: GrServices },
         { name: "Contato", link: "/contato/TelaContato", icon: MdContacts },
         { name: "Médicos", link: "/medico/TabelaMedico", icon: FaUserDoctor, margin: true },
-        { name: "Enfermeiro", link: "/enfermeiro/TabelaEnfermeiro", icon:  FaUserNurse },
-        { name: "Psicólogo", link: "/psicologo/TabelaPsicologo", icon: RiPsychotherapyFill },
-        { name: "Terapeuta", link: "/terapeuta/TabelaTerapeuta", icon:  GiBrain },
+        { name: "Consultas", link: "/consulta/TabelaConsulta", icon:  BsCalendar2PlusFill },
+        { name: "Medicamentos", link: "/medicamento/TabelaMedicamentos", icon: PiPillFill },
+        { name: "Pacientes", link: "/cadastrarPaciente/TabelaPaciente", icon:  ImProfile },
     ];
       
 

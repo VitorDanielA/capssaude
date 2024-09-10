@@ -87,13 +87,13 @@ export default function TabelaConsulta() {
                         />
                     </div>
                     <button className="bg-[#005562] rounded-lg text-white h-12 text-sm transition-all hover:bg-[#1f616b] px-5 adjust-buttons">
-                        <Link href="/consulta/FormCadastrarConsulta">
+                        <Link href="/consulta/FormCadastroConsulta">
                             Adicionar Consulta
                         </Link>
                     </button>
                 </div>
 
-                <div className="relative overflow-x-auto shadow-md rounded-lg mx-20">
+                <div className="relative overflow-x-auto shadow-md rounded-lg ml-20 mr-5">
                     <table className="w-full text-sm text-left rtl:text-right text-white bg-[#144d54]">
                         <thead className="text-xs text-white uppercase dark:bg-gray-800 text-center">
                             <tr>

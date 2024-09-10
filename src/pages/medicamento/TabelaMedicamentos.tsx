@@ -78,7 +78,7 @@ export default function TabelaMedicamentos() {
                     TABELA DE MEDICAMENTOS
                 </h1>
 
-                <div className='flex justify-start flex-wrap gap-5 my-5 mx-10'>
+                <div className='flex justify-start flex-wrap gap-5 my-5 mx-20'>
                     <div className="flex items-center adjust-buttons">
                         <InputFieldProps
                             type="text"
@@ -97,7 +97,7 @@ export default function TabelaMedicamentos() {
 
                 </div>
 
-                <div className="relative overflow-x-auto shadow-md rounded-lg mx-10">
+                <div className="relative overflow-x-auto shadow-md rounded-lg ml-20 mr-5">
                     <table className="w-full text-sm text-left rtl:text-right text-white bg-[#144d54]">
                         <thead className="text-xs text-white uppercase dark:bg-gray-800 text-center">
                             <tr>
