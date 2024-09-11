@@ -207,7 +207,7 @@ export default function CadastrarTerapeuta() {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"> 
             <div className="bg-white p-4 rounded shadow-md">
               <h1 className='text-black'>Cadastro realizado com sucesso!</h1>
-              <button onClick={handleContinue} className="bg-[#005562] p-2 mt-2 rounded-lg text-white hover:bg-[#4599a8] text-xl font-semibold">
+              <button onClick={handleContinue} className="bg-[#005562] p-2 mt-2 ml-14 rounded-lg text-white hover:bg-[#4599a8] text-xl font-semibold">
                 Continuar
               </button>
             </div>
