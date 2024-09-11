@@ -90,7 +90,7 @@ export default function TabelaMedico() {
                     </button>
                 </div>
 
-                <div className="relative overflow-x-auto shadow-md rounded-lg ml-20 mr-5">
+                <div className="relative overflow-x-auto shadow-md rounded-lg ml-20 mr-5 my-10">
                     <table className="w-full text-sm text-left rtl:text-right text-white bg-[#144d54]">
                         <thead className="text-xs text-white uppercase dark:bg-gray-800 text-center">
                         <tr>

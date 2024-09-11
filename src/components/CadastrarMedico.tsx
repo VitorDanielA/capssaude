@@ -216,7 +216,7 @@ export default function CadastrarMedico() {
                 Preencha os campos para cadastrar o médico!
             </h1>
             <div className="max-w-[800px] w-full bg-[#005562] p-6 text-white rounded-xl mb-10 fix-form-medico">
-                <form onSubmit={handleForm} className="flex flex-col">
+                <form onSubmit={handleForm} className="flex flex-col my-10">
                     <div className="grid grid-cols-3 gap-4">
                         {inputs.map((input) => (
                             <label key={input.name} className="">

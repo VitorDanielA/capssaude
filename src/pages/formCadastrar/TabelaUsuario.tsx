@@ -19,7 +19,6 @@ export default function TabelaUsuario() {
     const [selectedUser, setSelectedUser] = useState<usuariosProps | null>(null);
     const [editUser, setEditUser] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-
     useEffect(() => {
         const loadUsers = async () => {
             try {
