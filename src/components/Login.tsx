@@ -3,14 +3,42 @@ import Image from 'next/image';
 import ImgSaude from './../assets/undraw_medicine_b-1-ol.svg';
 import Link from "next/link";
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        setError('');
+        setLoading(true);
+    
+        const storedUser = localStorage.getItem('user');
+        
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+    
+            if (user.email === email && user.senha === password) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', user.email); 
+    
+                router.push('/homescreen');
+            } else {
+                setError('Email ou senha incorretos.');
+            }
+        } else {
+            setError('Nenhum usuário cadastrado.');
+        }
+    
+        setLoading(false);
+    };
+    
+    /* REAL FUNÇÃO PARA LOGAR O USER NO SISTEMA */
+    /*const handleSubmit = async (e: any) => {
         e.preventDefault();
         setError('');
         setLoading(true);
@@ -28,7 +56,7 @@ export default function Login() {
         } finally {
             setLoading(false);
         }
-    };
+    };*/
 
     return (
         <div className='flex items-center justify-around flex-wrap min-h-[100vh]'>

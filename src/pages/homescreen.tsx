@@ -4,10 +4,23 @@ import Footer from "@/components/Footer";
 import Login from "@/components/Login";
 import Navbar from "@/components/Navbar";
 import { Inter } from "next/font/google";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
+    const router = useRouter();
+
+    useEffect(() => {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+        if (isLoggedIn !== 'true') {
+            router.push('/');
+        }
+    }, []);
+
     return (
         <main id="home">
             <div className="h-[100vh] home">
@@ -20,6 +33,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            <br/><br/>
             <div id="service">
                 <Especialidades/>
             </div>

@@ -26,7 +26,19 @@ export default function Cadastrar() {
     });
   };
 
-  const handleForm = async (event: { preventDefault: () => void; }) => {
+  //USANDO LOCALSTORAGE
+  const handleForm = (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
+
+    localStorage.setItem('user', JSON.stringify(form)); 
+
+    setShowSuccessPopup(true);
+  };
+
+   /*
+     REAL FUNÇÃO PARA CADASTRAR USUÁRIO
+   */
+  /*const handleForm = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     console.log(form);
 
@@ -42,7 +54,7 @@ export default function Cadastrar() {
       console.error(error);
       alert('Erro ao criar usuário');
     }
-  };
+  };*/
 
   const handleContinue = () => {
     router.push('TabelaUsuario');
