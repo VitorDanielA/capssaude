@@ -14,10 +14,10 @@ const Sidebar = () => {
     const [open, setOpen] = useState(false);
 
     const menus = [
-        { name: "Home", link: "/", icon: IoHomeOutline },
+        { name: "Home", link: "/homescreen", icon: IoHomeOutline },
         { name: "Serviços", link: "/servicos/TelaServicos", icon: GrServices },
         { name: "Contato", link: "/contato/TelaContato", icon: MdContacts },
-        { name: "Médicos", link: "/medico/TabelaMedico", icon: FaUserDoctor, margin: true },
+        { name: "Médicos", link: "/medico/TabelaMedico", icon: FaUserDoctor},
         { name: "Consultas", link: "/consulta/TabelaConsulta", icon:  BsCalendar2PlusFill },
         { name: "Medicamentos", link: "/medicamento/TabelaMedicamentos", icon: PiPillFill },
         { name: "Pacientes", link: "/cadastrarPaciente/TabelaPaciente", icon:  ImProfile },
@@ -38,9 +38,9 @@ const Sidebar = () => {
                 key={i}
                 className={` ${
                   menu?.margin && "mt-5"
-                } group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}
+                } group flex items-center text-sm gap-3.5 font-medium pt-2 pb-2 ps-1 hover:bg-gray-800 rounded-md`}
               >
-                <div>{React.createElement(menu?.icon, { size: "20" })}</div>
+                <div>{React.createElement(menu?.icon, { size: "24" })}</div>
                 <h2
                   style={{
                     transitionDelay: `${i + 3}00ms`,

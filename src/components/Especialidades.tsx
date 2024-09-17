@@ -4,10 +4,12 @@ import Coracao from './../assets/coracao.png';
 import ApertoDeMaos from './../assets/aperto-de-mao.png';
 import Conversa from './../assets/programa-de-entrevista.png';
 import Examinando from './../assets/examinador-medico.png';
+import Sidebar from "./Sidebar";
 
 export default function Especialidades(){
     return(
         <div className="min-h-[100vh]" id="about">
+            <Sidebar/>
             <h1 className="text-5xl text-center mb-10 font-semibold">Nossas Especialidades</h1>
             <div className="flex items-center justify-center flex-wrap">
                 <Card imagem={Cerebro} descricao="O Departamento de Psiquiatria é dedicado ao estudo, diagnóstico e tratamento de distúrbios mentais, emocionais e comportamentais." titulo="Psiquiatra"/>

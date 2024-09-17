@@ -8,6 +8,7 @@ import editar from '@/assets/editar.png';
 import deletar from '@/assets/deletar.png';
 import Footer from "@/components/Footer";
 import { deleteMedicamento, fetchMedicamentos } from "@/helpers/medicamento";
+import Sidebar from "@/components/Sidebar";
 
 interface medicamentoProps {
     id: number;
@@ -67,7 +68,7 @@ export default function TabelaMedicamentos() {
         <main className="flex flex-col">
 
             <Navbar />
-
+            <Sidebar/>
             <h1 className="sm:text-5xl text-3xl text-[#005562] font-bold text-center mb-8 mt-8">
                 TABELA DE MEDICAMENTOS
             </h1>
@@ -97,7 +98,7 @@ export default function TabelaMedicamentos() {
 
                 </div>
 
-                <div className="relative overflow-x-auto shadow-md rounded-lg ml-20 mr-5">
+                <div className="relative overflow-x-auto shadow-md rounded-lg ml-20 mr-5 z-10">
                     <table className="w-full text-sm text-left rtl:text-right text-white bg-[#144d54]">
                         <thead className="text-xs text-white uppercase dark:bg-gray-800 text-center">
                             <tr>

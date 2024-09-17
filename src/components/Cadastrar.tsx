@@ -57,7 +57,7 @@ export default function Cadastrar() {
   };*/
 
   const handleContinue = () => {
-    router.push('TabelaUsuario');
+    router.push('/homescreen');
     setShowSuccessPopup(false);
   };
 
@@ -92,8 +92,8 @@ export default function Cadastrar() {
       </h1>
       <div className="max-w-[500px] w-full bg-[#005562] p-6 text-white rounded-xl">
         <form onSubmit={handleForm} className="flex flex-col">
-          {inputs.map((input) => (
-            <label htmlFor="">
+          {inputs.map((input, index) => (
+            <label htmlFor="" key={index}>
               {input.placeholder}
               <InputFieldProps
                 key={input.name}
@@ -124,7 +124,7 @@ export default function Cadastrar() {
             Criar conta
           </button>
 
-          <p className="mt-3 text-center text-lg">
+          <p className="my-3 text-center text-lg">
             Já tem uma conta?{' '}
             <span className="text-white border-b  cursor-pointer hover:text-gray-400 font-semibold">
               <Link href={"/"}>Clique aqui</Link>

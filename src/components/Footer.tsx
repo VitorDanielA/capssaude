@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Footer(){
     return(
-        <footer className="bg-[#005562] text-white">
+        <footer className="bg-[#005562] text-white mt-5">
             <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <p className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
@@ -25,7 +25,7 @@ export default function Footer(){
                 </div>
                 <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <span className="block text-sm text-white sm:text-center dark:text-gray-400">
-                    © 2024 CAPS Saúde. Projeto de Inovação.</span>
+                    © 2024 SysCaps Saúde. Projeto de Inovação.</span>
             </div>
         </footer>
     )

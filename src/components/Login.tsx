@@ -12,19 +12,22 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
+    
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
         setError('');
         setLoading(true);
-    
+
         const storedUser = localStorage.getItem('user');
+        
         
         if (storedUser) {
             const user = JSON.parse(storedUser);
     
             if (user.email === email && user.senha === password) {
                 localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('userEmail', user.email); 
+                localStorage.setItem('userEmail', JSON.stringify(user.email)); 
     
                 router.push('/homescreen');
             } else {
@@ -36,6 +39,8 @@ export default function Login() {
     
         setLoading(false);
     };
+
+    
     
     /* REAL FUNÇÃO PARA LOGAR O USER NO SISTEMA */
     /*const handleSubmit = async (e: any) => {
@@ -64,7 +69,7 @@ export default function Login() {
                 <Image src={ImgSaude} alt='Saúde' width={500} />
             </div>
             <div className='w-[300px] mb-5'>
-                <h1 className='text-2xl font-semibold'>Bem vindo ao CAPS Saúde!</h1>
+                <h1 className='text-2xl font-semibold'>Bem vindo ao SysCaps Saúde!</h1>
                 <p className='mb-4 mt-2 font-medium'>Faça login na sua conta</p>
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col">

@@ -8,6 +8,7 @@ import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import { deleteMedico, fetchMedicos } from '@/helpers/medico'; // Funções para buscar e deletar médicos
+import Sidebar from '@/components/Sidebar';
 
 interface MedicoProps {
     id: number;
@@ -67,6 +68,7 @@ export default function TabelaMedico() {
 
     return (
         <main className="flex flex-col">
+            <Sidebar/>
             <div className="mt-24">
                 <h1 className="sm:text-5xl text-3xl text-[#005562] font-bold text-center mb-8 mt-8">
                     TABELA DE MÉDICOS

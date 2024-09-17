@@ -19,9 +19,9 @@ const Navbar = () => {
   ];
 
   return (
-    <div className='flex justify-between items-center h-24 max-w-[100%] fixed w-full px-10 bg-white'>
+    <div className='flex justify-between items-center h-24 max-w-[100%] fixed w-full px-10 !bg-[#f3f3f3] z-50'>
       <Image src={Health} className="me-2" alt="Flowbite Logo" width={50} height={50}></Image>
-      <h1 className='w-full text-3xl font-bold text-[#005562] uppercase'>CAPS Saúde</h1>
+      <h1 className='w-full text-3xl font-bold text-[#005562] uppercase'>SysCaps Saúde</h1>
       <ul className='hidden md:flex'>
         {navItems.map(item => (
             item.link ? (
@@ -52,7 +52,7 @@ const Navbar = () => {
         }
       >
 
-        <h1 className='w-full text-3xl font-bold text-white m-4 '>CAPS Saúde</h1>
+        <h1 className='w-full text-3xl font-bold text-white m-4 '>SysCaps Saúde</h1>
 
         {navItems.map(item => (
           <a

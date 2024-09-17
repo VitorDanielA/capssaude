@@ -6,9 +6,8 @@ export default function Document() {
   return (
     <Html lang="pt-br">
       <Head />
-      <body className="">
+      <body className="!bg-[#f3f3f3]">
         <Navbar />
-        <Sidebar />
         <Main />
         <NextScript />
       </body>

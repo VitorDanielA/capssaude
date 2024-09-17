@@ -8,6 +8,7 @@ import deletar from '@/assets/deletar.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import { deleteConsulta, fetchConsultas } from '@/helpers/consulta';
+import Sidebar from '@/components/Sidebar';
 
 interface consultaProps{
     id: number;
@@ -70,6 +71,7 @@ export default function TabelaConsulta() {
 
     return (
         <main className="flex flex-col">
+            <Sidebar/>
             <div className="mt-24">
                 <h1 className="sm:text-5xl text-3xl text-[#005562] font-bold text-center mb-8 mt-8">
                     TABELA DE CONSULTAS
