@@ -78,7 +78,7 @@ export default function CadastrarMedico() {
     };
 
     const especialidades = [
-        { value: '', label: ''},
+        { value: 'Especialidade', label: 'Especialidade'},
         { value: 'MEDICO', label: 'Medico', sigla: 'CRM'},
         { value: 'ENFERMEIRO', label: 'Enfermeiro', sigla: 'COREN'},
         { value: 'PSICOLOGO', label: 'Psicologo', sigla: 'CRP'},
@@ -86,9 +86,10 @@ export default function CadastrarMedico() {
     ]
 
     const sexos = [
-        { value: '', label: ''},
+        { value: 'Sexo', label: 'Sexo'},
         { value: 'Masculino', label:'Masculino'},
         { value: 'Feminino', label:'Feminino'},
+        { value: 'PNI', label: 'Prefiro não me identificar'}
     ]
 
     const inputs = [
@@ -183,7 +184,8 @@ export default function CadastrarMedico() {
             id: "diasAtendimento",
             name: "diasAtendimento",
             className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
-            placeholder: 'Dias de Atendimento',
+            label: 'Dias de Atendimento',
+            placeholder: 'Ex: Segunda,Quarta,Sexta',
             required: true,
         },
         {
@@ -191,7 +193,8 @@ export default function CadastrarMedico() {
             id: "horasAtendimento",
             name: "horasAtendimento",
             className: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:outline-none mb-5 mt-2',
-            placeholder: 'Horas de Atendimento',
+            label: 'Horas de Atendimento',
+            placeholder: 'Ex: 12:00,15:00,18:00',
             required: true,
         },
         {
@@ -220,6 +223,7 @@ export default function CadastrarMedico() {
                     <div className="grid grid-cols-3 gap-4">
                         {inputs.map((input) => (
                             <label key={input.name} className="">
+                                {input.label}
                                 {input.placeholder}
                                 {input.type === 'select' ? (
                                     <select
@@ -240,6 +244,7 @@ export default function CadastrarMedico() {
                                         type={input.type}
                                         name={input.name}
                                         className={input.className}
+                                        label={input.label}
                                         placeholder={input.placeholder}
                                         required={input.required}
                                         value={form[input.name]}
