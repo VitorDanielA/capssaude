@@ -187,6 +187,7 @@ export default function CadastrarMedico() {
             label: 'Dias de Atendimento',
             placeholder: 'Ex: Segunda,Quarta,Sexta',
             required: true,
+            isArray: true,
         },
         {
             type: "text",
@@ -196,6 +197,7 @@ export default function CadastrarMedico() {
             label: 'Horas de Atendimento',
             placeholder: 'Ex: 12:00,15:00,18:00',
             required: true,
+            isArray: true,
         },
         {
             type: 'text',
@@ -224,7 +226,7 @@ export default function CadastrarMedico() {
                         {inputs.map((input) => (
                             <label key={input.name} className="">
                                 {input.label}
-                                {input.placeholder}
+                                {input.isArray === true ? '' : input.placeholder }
                                 {input.type === 'select' ? (
                                     <select
                                         name={input.name}
