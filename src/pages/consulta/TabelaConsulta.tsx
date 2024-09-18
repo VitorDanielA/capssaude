@@ -12,6 +12,7 @@ import Sidebar from '@/components/Sidebar';
 
 interface consultaProps{
     id: number;
+    paciente: string;
     acompanhanteLegal: string;
     data: Date;
     horario: string;
@@ -67,7 +68,7 @@ export default function TabelaConsulta() {
         consulta.acompanhanteLegal.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const trs = ["Acompanhante legal", "Data da Consuta", "Horário da Consulta", "Sintomas", "Duração dos Sintomas", "Medicamentos", "Orientações", "Editar", "Excluir"];
+    const trs = ["Paciente", "Acompanhante legal", "Data da Consuta", "Horário da Consulta", "Sintomas", "Duração dos Sintomas", "Medicamentos", "Orientações", "Editar", "Excluir"];
 
     return (
         <main className="flex flex-col">
@@ -109,6 +110,9 @@ export default function TabelaConsulta() {
                         <tbody className='bg-[#e0f9fb]'>
                             {filteredConsultas.map((consulta, index) => (
                                 <tr key={index} className="text-center font-medium text-[#144d54]">
+                                    <td className="px-6 py-4">
+                                        {consulta.paciente}
+                                    </td>
                                     <th scope="row" className="px-6 py-4 whitespace-nowrap">
                                         {consulta.acompanhanteLegal}
                                     </th>
